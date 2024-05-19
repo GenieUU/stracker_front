@@ -1,38 +1,231 @@
-.App {
-  text-align: center;
+.Main {
+  width: 1440px;
+  height: 1024px;
+  position: relative;
+  background: white;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(249, 228, 211, 0.33);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.Logo {
+  width: 119px;
+  height: 119px;
+  left: 16px;
+  top: -12px;
+  position: absolute;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.CameraScreen {
+  width: 896px;
+  height: 699px;
+  left: 56px;
+  top: 162px;
+  position: absolute;
+  background: #DCC5B3;
+  border-radius: 40px;
+}
+
+.SideButton {
+  width: 34px;
+  height: 20px;
+  left: 1389px;
+  top: 16px;
+  position: absolute;
+}
+
+.Time {
+  width: 255px;
+  height: 86px;
+  left: 1068px;
+  top: 232px;
+  position: absolute;
+}
+
+.TimerTime {
+  left: 0;
+  top: 32px;
+  position: absolute;
+  color: black;
+  font-size: 45px;
+  font-family: 'Inter';
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+.TimerDate {
+  left: 3px;
+  top: 0;
+  position: absolute;
+  color: black;
+  font-size: 30px;
+  font-family: 'Inter';
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+.Concentration {
+  width: 251px;
+  height: 82px;
+  left: 1061px;
+  top: 678px;
+  position: absolute;
+}
+
+.ConcentrationValue {
+  width: 240px;
+  height: 20px;
+  left: 11px;
+  top: 62px;
+  position: absolute;
+  background: linear-gradient(90deg, #DCC5B3 0%, #C4AB97 31%, #A48871 60%, #84644B 80%, #614026 100%);
+  border-radius: 10px;
+}
+
+.ConcentrationValueTri {
+  width: 10px;
+  height: 10px;
+  left: 90px;
+  top: 64px;
+  position: absolute;
+  background: black;
+}
+
+.ConcentrationTitleBox {
+  width: 120px;
+  height: 40px;
+  left: 0;
+  top: 0;
+  position: absolute;
+  background: #DCC5B3;
+  border-radius: 20px;
+}
+
+.ConcentrationTitle {
+  left: 11px;
+  top: 8px;
+  position: absolute;
   color: white;
+  font-size: 20px;
+  font-family: 'Inter';
+  font-weight: 700;
+  word-wrap: break-word;
 }
 
-.App-link {
-  color: #61dafb;
+.HeartRate {
+  width: 264px;
+  height: 87px;
+  left: 1060px;
+  top: 569px;
+  position: absolute;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.HeartRateTitleBox {
+  width: 120px;
+  height: 40px;
+  left: 0;
+  top: 0;
+  position: absolute;
+  background: #DCC5B3;
+  border-radius: 20px;
+}
+
+.HeartRateTitle {
+  left: 11px;
+  top: 8px;
+  position: absolute;
+  color: white;
+  font-size: 20px;
+  font-family: 'Inter';
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+.HeartRatePicture {
+  width: 43.5px;
+  height: 33px;
+  left: 76px;
+  top: 54px;
+  position: absolute;
+  background: black;
+}
+
+.HeartRateBpm {
+  width: 133px;
+  height: 18px;
+  left: 131px;
+  top: 59px;
+  position: absolute;
+  color: black;
+  font-size: 20px;
+  font-family: 'Inter';
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+.State {
+  width: 270px;
+  height: 163px;
+  left: 1061px;
+  top: 356px;
+  position: absolute;
+}
+
+.StateBox {
+  width: 270px;
+  height: 163px;
+  left: 0;
+  top: 0;
+  position: absolute;
+  background: white;
+  border-radius: 20px;
+  border: 3px #DCC5B3 solid;
+}
+
+.StateText {
+  left: 91px;
+  top: 103px;
+  position: absolute;
+  color: black;
+  font-size: 22px;
+  font-family: 'Inter';
+  font-weight: 200;
+  word-wrap: break-word;
+}
+
+.StatePicture {
+  width: 27.78px;
+  height: 55.02px;
+  left: 121px;
+  top: 38px;
+  position: absolute;
+  background: black;
+}
+
+.startButton {
+  width: 154px;
+  height: 70px;
+  left: 427px;
+  top: 477px;
+  position: absolute;
+  background: #674429;
+  border-radius: 10px;
+  border: 2px #674429 solid;
+}
+
+.StartText {
+  left: 471px;
+  top: 495px;
+  position: absolute;
+  color: white;
+  font-size: 28px;
+  font-family: 'Inter';
+  font-weight: 600;
+  word-wrap: break-word;
 }
