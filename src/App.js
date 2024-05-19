@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import './App.css';
+import SignUp from './Signup'; // Import SignUp component
 import logo from './로고_완성본_제외제거.png';
 import SideButton from './사이드바_배경제거.png';
-import './Sidebar.css'; // Sidebar-related style file import
+import './Sidebar.css';
 
 const App = () => {
-  // State to manage sidebar visibility
   const [sideBarVisible, setSidebarVisible] = useState(false);
+  const [showSignUp, setShowSignUp] = useState(false); // State to control SignUp page visibility
+
+  // Function to toggle SignUp page visibility
+  const toggleSignUp = () => {
+    setShowSignUp(!showSignUp);
+  };
 
   return (
     <div className="Main">
@@ -21,7 +27,7 @@ const App = () => {
       />
       {sideBarVisible && (
         <div className="Side">
-          <div className="SidebarText">회원가입</div>
+          <div className="SidebarText" onClick={toggleSignUp}>회원가입</div> {/* Toggle SignUp page visibility on click */}
           <div className="Line" />
           <div className="Vector" />
           <div className="Idbox" />
@@ -42,6 +48,7 @@ const App = () => {
           <div className="StatisticsText3">공부 체크리스트 메모</div>
         </div>
       )}
+      {showSignUp && <SignUp />} {/* Render SignUp page if showSignUp state is true */}
       <div className="Time">
         <div className="TimerDate">2024년 12월 30일</div>
         <div className="TimerTime">00 : 00 : 00</div>
