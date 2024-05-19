@@ -1,0 +1,69 @@
+/* CSS styles go here */
+.SignUp {
+    width: 1440px;
+    height: 1024px;
+    position: relative;
+    background: white;
+  }
+  
+  .EntypoTriangleUp {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+  }
+  
+  .Sidebutton {
+    width: 34px;
+    height: 20px;
+    position: absolute;
+  }
+  
+  .Rectangle18, .Rectangle19, .Rectangle20 {
+    position: absolute;
+    background: #DCC5B3;
+    border-radius: 20px;
+  }
+  
+  .Rectangle4 {
+    width: 1440px;
+    height: 1024px;
+    position: absolute;
+    background: rgba(249, 228, 211, 0.33);
+  }
+  
+  .Logo {
+    width: 119px;
+    height: 119px;
+    position: absolute;
+  }
+  
+  .Rectangle29, .Rectangle32, .Rectangle30, .Rectangle31, .Rectangle34, .Rectangle35, .Rectangle36 {
+    width: 741px;
+    height: 70px;
+    position: absolute;
+    background: white;
+    border: 2px #674429 solid;
+  }
+  
+  .Rectangle33, .Rectangle37 {
+    width: 134px;
+    height: 70px;
+    position: absolute;
+    background: #674429;
+    border-radius: 10px;
+    border: 2px #674429 solid;
+  }
+  
+  .Line43, .Line44, .Line45, .Line46, .Line47, .Line48, .Line50 {
+    width: 220px;
+    height: 0;
+    position: absolute;
+    border: 1px #674429 solid;
+  }
+  
+  .Rectangle18, .Rectangle19, .Rectangle20, .Line51 {
+    border: 3px #DCC5B3 solid;
+  }
+  
+  /* Define styles for other elements as needed */
+  
