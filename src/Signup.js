@@ -1,54 +1,41 @@
 import React from 'react';
-import logo from './_logo.png';
 
 const SignUp = () => {
-  return (
-    <div className="SignUp" >
-  <div className="Sidebutton" >
-    <div className="Rectangle18"  />
-    <div className="Rectangle19" />
-    <div className="Rectangle20" />
-  </div>
-  <div className="Background" />
-  <img 
-  className="Logo" 
-  src={logo} 
-  alt="Logo" />
+  return(
+    <div className="SignUp" style={{width: 1440, height: 1024, position: 'relative', background: 'white'}}>
+  <div className="Background" style={{width: 1440, height: 1024, left: 0, top: 0, position: 'absolute', background: 'rgba(249, 228, 211, 0.33)'}} />
   <div style={{left: 840.01, top: 650, position: 'absolute', color: 'black', fontSize: 30, fontFamily: 'Inter', fontWeight: '400', wordWrap: 'break-word'}}>@</div>
-  <div className="Idbox"  />
-  <div className="Repetitioncheckbox" />
-  <div className="Finishbox" />
-  <div className="Namebox" />
-  <div className="Emailbox" />
-  <div className="Emailselfbox" />
-  <div className="Emailselectbox" />
-  <div className="Passwordbox" />
-  <div className="Passwordcheckbox" />
-  <div className="Idline" ></div>
-  <div className="Emailline" ></div>
-  <div className="Passwordline" ></div>
-  <div className="Passwordcheckline" ></div>
-  <div className="Nameline" ></div>
+  <div className="Idbox" style={{width: 592, height: 70, left: 483.01, top: 320, position: 'absolute', background: 'white', border: '2px #674429 solid'}} />
+  <div className="Repetitioncheckbox" style={{width: 134, height: 70, left: 1090.01, top: 320, position: 'absolute', background: '#674429', borderRadius: 10, border: '2px #674429 solid'}} />
+  <div className="Finishbox" style={{width: 187, height: 70, left: 626, top: 873, position: 'absolute', background: '#674429', borderRadius: 10, border: '2px #674429 solid'}} />
+  <div className="Namebox" style={{width: 741, height: 70, left: 483.01, top: 557, position: 'absolute', background: 'white', border: '2px #674429 solid'}} />
+  <div className="Emailbox" style={{width: 344, height: 70, left: 483.01, top: 636, position: 'absolute', background: 'white', border: '2px #674429 solid'}} />
+  <div className="Emailselfbox" style={{width: 344, height: 70, left: 880.01, top: 636, position: 'absolute', background: 'white', border: '2px #674429 solid'}} />
+  <div className="Emailselectbox" style={{width: 344, height: 70, left: 880.01, top: 715, position: 'absolute', background: 'white', border: '2px #674429 solid'}} />
+  <div className="Passwordbox" style={{width: 741, height: 70, left: 483.01, top: 399, position: 'absolute', background: 'white', border: '2px #674429 solid'}} />
+  <div className="Passwordcheckbox" style={{width: 741, height: 70, left: 483.01, top: 478, position: 'absolute', background: 'white', border: '2px #674429 solid'}} />
+  <div className="Idline" style={{width: 220, height: 0, left: 222, top: 313, position: 'absolute', border: '1px #674429 solid'}}></div>
+  <div className="Emailline" style={{width: 220, height: 0, left: 217.01, top: 631, position: 'absolute', border: '1px #674429 solid'}}></div>
+  <div className="Passwordline" style={{width: 220, height: 0, left: 216, top: 394.44, position: 'absolute', border: '1px #674429 solid'}}></div>
+  <div className="Passwordcheckline" style={{width: 220, height: 0, left: 216, top: 473.44, position: 'absolute', border: '1px #674429 solid'}}></div>
+  <div className="Nameline" style={{width: 220, height: 0, left: 216, top: 552.44, position: 'absolute', border: '1px #674429 solid'}}></div>
   <div style={{left: 222.01, top: 337.96, position: 'absolute', color: 'black', fontSize: 28, fontFamily: 'Inter', fontWeight: '400', wordWrap: 'break-word'}}>아이디</div>
   <div style={{left: 222.01, top: 416.96, position: 'absolute', color: 'black', fontSize: 28, fontFamily: 'Inter', fontWeight: '400', wordWrap: 'break-word'}}>비밀번호</div>
   <div style={{left: 222.01, top: 495.96, position: 'absolute', color: 'black', fontSize: 28, fontFamily: 'Inter', fontWeight: '400', wordWrap: 'break-word'}}>비밀번호 확인</div>
   <div className="820" style={{left: 501.01, top: 416.96, position: 'absolute', color: '#919191', fontSize: 28, fontFamily: 'Inter', fontWeight: '400', wordWrap: 'break-word'}}>영문, 숫자, 특수문자 포함 8~20자리</div>
   <div style={{left: 501.01, top: 495.96, position: 'absolute', color: '#919191', fontSize: 28, fontFamily: 'Inter', fontWeight: '400', wordWrap: 'break-word'}}>비밀번호를 다시 입력해주세요.</div>
   <div style={{left: 896.01, top: 733, position: 'absolute', color: '#919191', fontSize: 28, fontFamily: 'Inter', fontWeight: '400', wordWrap: 'break-word'}}>직접 입력</div>
-  <div className="FluentIosArrow24Filled" style={{width: 24, height: 24, left: 1179.01, top: 757, position: 'absolute', transform: 'rotate(-90deg)', transformOrigin: '0 0'}}>
-    <div className="Vector" style={{width: 10.51, height: 20.01, left: 2.50, top: 2, position: 'absolute', background: '#717171'}}></div>
-  </div>
+  <div className="Emailarrow" style={{width: 10.51, height: 20.01, left: 1191, top: 755.51, position: 'absolute', transform: 'rotate(-90deg)', transformOrigin: '0 0', background: '#717171'}}></div>
   <div style={{left: 1101.01, top: 338, position: 'absolute', color: 'white', fontSize: 28, fontFamily: 'Inter', fontWeight: '600', wordWrap: 'break-word'}}>중복 확인</div>
   <div style={{left: 668, top: 891, position: 'absolute', color: 'white', fontSize: 28, fontFamily: 'Inter', fontWeight: '600', wordWrap: 'break-word'}}>가입완료</div>
-  <div className="SignupTitle">
+  <div className="SignupTitle" style={{width: 220, height: 75, left: 610, top: 120, position: 'absolute'}}>
     <div style={{left: 27, top: 21, position: 'absolute', color: '#C4AB97', fontSize: 45, fontFamily: 'Inter', fontWeight: '700', wordWrap: 'break-word'}}>회원가입</div>
-    <div className="Tileline" ></div>
+    <div className="Tileline" style={{width: 220, height: 0, left: 0, top: 0, position: 'absolute', border: '3px #DCC5B3 solid'}}></div>
   </div>
-  <div className="Lastline" ></div>
+  <div className="Lastline" style={{width: 220, height: 0, left: 216.01, top: 789, position: 'absolute', border: '1px #674429 solid'}}></div>
   <div style={{left: 223.01, top: 575, position: 'absolute', color: 'black', fontSize: 28, fontFamily: 'Inter', fontWeight: '400', wordWrap: 'break-word'}}>이름</div>
   <div style={{left: 223.01, top: 653, position: 'absolute', color: 'black', fontSize: 28, fontFamily: 'Inter', fontWeight: '400', wordWrap: 'break-word'}}>이메일</div>
 </div>
-  );
-};
-
+  )
+}
 export default SignUp;
