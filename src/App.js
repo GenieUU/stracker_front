@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import './App.css';
-import SignUp from './Signup'; // Import SignUp component
-import logo from './로고_완성본_제외제거.png';
-import SideButton from './사이드바_배경제거.png';
+import SignUp from './Signup'; 
+import logo from './_logo.png';
+import SideButton from './_SideButton.png';
+import HeartRatePicture from './_HeartRatePicture.png';
+import ConcentrationValueTri from './_ConcentrationValueTri.png';
 import './Sidebar.css';
 
 const App = () => {
   const [sideBarVisible, setSidebarVisible] = useState(false);
-  const [showSignUp, setShowSignUp] = useState(false); // State to control SignUp page visibility
+  const [showSignUp, setShowSignUp] = useState(false);
 
-  // Function to toggle SignUp page visibility
+  //회원가입 페이지 보이기
   const toggleSignUp = () => {
     setShowSignUp(!showSignUp);
   };
@@ -17,7 +19,10 @@ const App = () => {
   return (
     <div className="Main">
       <div className="Background" />
-      <img className="Logo" src={logo} alt="Logo" />
+      <img 
+      className="Logo" 
+      src={logo} 
+      alt="Logo" />
       <div className="CameraScreen" />
       <img
         className="SideButton"
@@ -55,14 +60,20 @@ const App = () => {
       </div>
       <div className="Concentration">
         <div className="ConcentrationValue" />
-        <div className="ConcentrationValueTri" />
+        <img 
+        className="ConcentrationValueTri"
+        src={ConcentrationValueTri} 
+        alt="ConcentrationValueTri" />
         <div className="ConcentrationTitleBox" />
         <div className="ConcentrationTitle">현재 집중도</div>
       </div>
       <div className="HeartRate">
         <div className="HeartRateTitleBox" />
         <div className="HeartRateTitle">현재 심박수</div>
-        <div className="HeartRatePicture" />
+        <img 
+        className="HeartRatePicture" 
+        src={HeartRatePicture} 
+        alt="HeartRatePicture" />
         <div className="HeartRateBpm">80 BPM</div>
       </div>
       <div className="State">
