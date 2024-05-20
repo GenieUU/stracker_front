@@ -1,19 +1,21 @@
 .Side {
     width: 280px;
     height: 487px;
-    position: absolute;
+    position: fixed;
     background: #DCC5B3;
-    border-top-left-radius: 20px;
-    right: 0; 
+    border-bottom-left-radius: 20px;
+    right: 0;
+    z-index: 10;
   }
   
   .Line {
     width: 238px;
     height: 0;
-    left: 96px;
+    left: 21px;
     top: 291.50px;
     position: absolute;
     border: 1px #674429 solid;
+    z-index: 0;
   }
   
   .Vector {
@@ -25,16 +27,40 @@
     background: #674429;
   }
   
-  .Idbox,
-  .Passwordbox,
-  .Loginbox {
+  .Idbox {
     width: 238px;
     height: 46px;
-    left: 99px;
+    top: 102px;
+    left: 21px;
     position: absolute;
     background: white;
     border-radius: 10px;
     border: 1px #674429 solid;
+    z-index: 0;
+  }
+  
+  .Passwordbox {
+    width: 238px;
+    height: 46px;
+    top: 155px;
+    left: 21px;
+    position: absolute;
+    background: white;
+    border-radius: 10px;
+    border: 1px #674429 solid;
+    z-index: 0;
+  }
+
+  .Loginbox {
+    width: 238px;
+    height: 46px;
+    top: 150px;
+    left: 21px;
+    position: absolute;
+    background: white;
+    border-radius: 10px;
+    border: 1px #674429 solid;
+    z-index: 0;
   }
   
   .Loginbox {
@@ -88,9 +114,9 @@
     font-family: 'Inter';
     word-wrap: break-word;
   }
-  
+
   .SidebarText {
-    left: 195px;
+    left: 115px;
     top: 257px;
     color: black;
     font-size: 12px;
@@ -98,7 +124,7 @@
   }
   
   .LoginText {
-    left: 186px;
+    left: 105px;
     top: 217px;
     color: white;
     font-size: 23px;
@@ -113,35 +139,38 @@
   }
   
   .Id {
-    left: 115px;
+    left: 40px;
     top: 111px;
   }
   
   .Password {
-    left: 115px;
+    left: 40px;
     top: 165px;
   }
   
   .StatisticsText1 {
-    left: 129px;
+    width: 200px;
+    left: 45px;
     top: 305px;
     color: #674429;
-    font-size: 20px;
-    font-weight: 300;
+    font-size: 18px;
+    font-weight: 400;
   }
   
   .StatisticsText2 {
-    left: 129px;
+    width: 200px;
+    left: 45px;
     top: 343px;
     color: #674429;
-    font-size: 20px;
-    font-weight: 300;
+    font-size: 18px;
+    font-weight: 400;
   }
   
   .StatisticsText3 {
-    left: 129px;
+    width: 200px;
+    left: 45px;
     top: 383px;
     color: #674429;
-    font-size: 20px;
-    font-weight: 300;
+    font-size: 18px;
+    font-weight: 400;
   }

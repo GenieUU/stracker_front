@@ -3,6 +3,7 @@
   height: 1024px;
   position: relative;
   background: white;
+  z-index: ０;
 }
 
 .Background {
@@ -12,6 +13,7 @@
   width: 100vw;
   height: 100vh;
   background: rgba(249, 228, 211, 0.33);
+  z-index: ０;
 }
 
 .Logo {
@@ -46,6 +48,7 @@
   left: 1068px;
   top: 232px;
   position: absolute;
+  z-index: 1;
 }
 
 .TimerTime {
@@ -57,6 +60,7 @@
   font-family: 'Inter';
   font-weight: 700;
   word-wrap: break-word;
+  z-index: 1;
 }
 
 .TimerDate {
@@ -68,6 +72,7 @@
   font-family: 'Inter';
   font-weight: 700;
   word-wrap: break-word;
+  z-index: 1;
 }
 
 .Concentration {
