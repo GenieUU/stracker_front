@@ -18,15 +18,14 @@
     z-index: 0;
   }
   
-  .Vector {
-    width: 18px;
-    height: 18px;
-    left: 324px;
-    top: 62px;
+  .OutPictureX {
+    width: 23px;
+    height: 23px;
+    right: 8px;
+    top: 10px;
     position: absolute;
-    background: #674429;
   }
-  
+
   .Idbox {
     width: 238px;
     height: 46px;
@@ -68,34 +67,34 @@
     background: #674429;
   }
   
-  .IcRoundSettings,
-  .IcRoundLogOut {
+  .SettingsPicture,
+  .LogOutPicture {
     width: 24px;
     height: 24px;
     position: absolute;
   }
   
-  .IcRoundSettings .Vector,
-  .IcRoundLogOut .Vector {
+  .SettingsPicture .Vector,
+  .LogOutPicture .Vector {
     position: absolute;
     background: #717171;
   }
   
-  .IcRoundSettings .Vector {
+  .SettingsPicture {
     width: 19.45px;
     height: 20px;
     left: 2.28px;
     top: 2px;
   }
   
-  .IcRoundLogOut .Vector {
+  .LogOutPicture .Vector {
     width: 13px;
     height: 20px;
     left: 4px;
     top: 2px;
   }
   
-  .IcRoundLogOut .Vector + .Vector {
+  .LogOutPicture {
     width: 13.09px;
     height: 9.14px;
     left: 9px;

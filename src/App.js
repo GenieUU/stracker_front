@@ -5,6 +5,7 @@ import logo from './_logo.png';
 import SideButton from './_SideButton.png';
 import HeartRatePicture from './_HeartRatePicture.png';
 import ConcentrationValueTri from './_ConcentrationValueTri.png';
+import OutPictureX from './_OutPictureX.png';
 import './Sidebar.css';
 
 const App = () => {
@@ -34,19 +35,19 @@ const App = () => {
         <div className="Side">
           <div className="SidebarText" onClick={toggleSignUp}>회원가입</div> {/* Toggle SignUp page visibility on click */}
           <div className="Line" />
-          <div className="Vector" />
+          <img 
+          className="OutPictureX" 
+          src={OutPictureX} 
+          alt="OutPictureX" />
           <div className="Idbox" />
           <div className="Passwordbox" />
           <div className="Loginbox" />
           <div className="LoginText">로그인</div>
           <div className="Id">ID</div>
           <div className="Password">PASSWORD</div>
-          <div className="IcRoundSettings">
-            <div className="Vector" />
+          <div className="SettingsPicture">
           </div>
-          <div className="IcRoundLogOut">
-            <div className="Vector" />
-            <div className="Vector" />
+          <div className="LogOutPicture">
           </div>
           <div className="StatisticsText1">학습량 통계 확인하기</div>
           <div className="StatisticsText2">집중도 통계 확인하기</div>
