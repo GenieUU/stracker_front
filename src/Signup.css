@@ -4,10 +4,6 @@
     position: relative;
     background: white;
   }
-  
-  .initialState {
-    color: gray
-  }
 
   .Background {
     position: fixed;
@@ -46,7 +42,7 @@
   }
 
   .SUIdbox {
-    width: 590px;
+    width: 741px;
     height: 70px;
     left: 483.01px;
     top: 320px;
@@ -56,17 +52,6 @@
     word-wrap: break-word;
     position: absolute;
     background: white;
-    border: 2px #674429 solid;
-  }
-  
-  .SURepetitioncheckbox {
-    width: 134px;
-    height: 70px;
-    left: 1090.01px;
-    top: 320px;
-    position: absolute;
-    background: #674429;
-    border-radius: 10px;
     border: 2px #674429 solid;
   }
   
@@ -86,6 +71,10 @@
     height: 70px;
     left: 483.01px;
     top: 557px;
+    font-size: 28px;
+    font-family: 'Inter';
+    font-weight: 400;
+    word-wrap: break-word;
     position: absolute;
     background: white;
     border: 2px #674429 solid;
@@ -96,6 +85,10 @@
     height: 70px;
     left: 483.01px;
     top: 636px;
+    font-size: 28px;
+    font-family: 'Inter';
+    font-weight: 400;
+    word-wrap: break-word;
     position: absolute;
     background: white;
     border: 2px #674429 solid;
@@ -120,6 +113,7 @@
     background: white;
     border: 2px #674429 solid;
   }
+ 
   
   .SUPasswordbox {
     width: 741px;
@@ -130,7 +124,6 @@
     font-family: 'Inter';
     font-weight: 400;
     word-wrap: break-word;
-
     position: absolute;
     background: white;
     border: 2px #674429 solid;
@@ -141,6 +134,10 @@
     height: 70px;
     left: 483.01px;
     top: 478px;
+    font-size: 28px;
+    font-family: 'Inter';
+    font-weight: 400;
+    word-wrap: break-word;
     position: absolute;
     background: white;
     border: 2px #674429 solid;
@@ -255,28 +252,6 @@
     top: 653px;
   }
   
-  .PasswordHint {
-    position: absolute;
-    color: #919191;
-    font-size: 28px;
-    font-family: 'Inter';
-    font-weight: 400;
-    word-wrap: break-word;
-    left: 501.01px;
-    top: 416.96px;
-  }
-  
-  .PasswordCheckHint {
-    position: absolute;
-    color: #919191;
-    font-size: 28px;
-    font-family: 'Inter';
-    font-weight: 400;
-    word-wrap: break-word;
-    left: 501.01px;
-    top: 495.96px;
-  }
-  
   .EmailSelfHint {
     position: absolute;
     color: #919191;
@@ -297,17 +272,6 @@
     transform: rotate(-90deg);
     transform-origin: 0 0;
     background: #717171;
-  }
-  
-  .CheckDuplicationText {
-    position: absolute;
-    color: white;
-    font-size: 28px;
-    font-family: 'Inter';
-    font-weight: 600;
-    word-wrap: break-word;
-    left: 1101.01px;
-    top: 338px;
   }
   
   .FinishText {

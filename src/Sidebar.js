@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Sidebar.css';
 import SideButton from './_SideButton.png';
 import OutPictureX from './_OutPictureX.png';
 
 const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp }) => {
+  const [userId, setUserId] = useState('');
+  const [userPassword, setUserPassword] = useState('');
+
+  // SUIdbox에 입력된 값이 변경 시 호출
+  const handleUserId = (event) => {
+    setUserId(event.target.value);
+  };
+
+  // Password 입력란에 입력된 값이 변경 시 호출
+  const handleUserPassword = (event) => {
+    setUserPassword(event.target.value);
+  };
+
   return (
     <>
       <img
@@ -22,8 +35,20 @@ const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp }) => {
             alt="OutPictureX" 
             onClick={toggleSidebar}
           />
-          <div className="Idbox" />
-          <div className="Passwordbox" />
+s
+          <input
+        className="Idbox"
+        type="text"
+        value={userId}
+        onChange={handleUserId}
+      />
+
+                <input
+        className="Passwordbox"
+        type="text"
+        value={userPassword}
+        onChange={handleUserPassword}
+      />
           <div className="Loginbox" />
           <div className="LoginText">로그인</div>
           <div className="Id">ID</div>
