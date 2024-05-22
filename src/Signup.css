@@ -1,0 +1,338 @@
+.SignUp {
+    width: 1440px;
+    height: 1024px;
+    position: relative;
+    background: white;
+  }
+  
+  .Background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(249, 228, 211, 0.33);
+  }
+
+  .Logo {
+    width: 119px;
+    height: 119px;
+    left: 16px;
+    top: -12px;
+    position: absolute;
+  }
+
+  .SideButton {
+    width: 34px;
+    height: 20px;
+    left: 1389px;
+    top: 16px;
+    position: absolute;
+  }
+  
+  .AtSymbol {
+    left: 840.01px;
+    top: 650px;
+    position: absolute;
+    color: black;
+    font-size: 30px;
+    font-family: 'Inter';
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  
+  .SUIdbox {
+    width: 741px;
+    height: 70px;
+    left: 483.01px;
+    top: 320px;
+    position: absolute;
+    background: white;
+    border: 2px #674429 solid;
+  }
+  
+  .SURepetitioncheckbox {
+    width: 134px;
+    height: 70px;
+    left: 1090.01px;
+    top: 320px;
+    position: absolute;
+    background: #674429;
+    border-radius: 10px;
+    border: 2px #674429 solid;
+  }
+  
+  .SUFinishbox {
+    width: 187px;
+    height: 70px;
+    left: 626px;
+    top: 873px;
+    position: absolute;
+    background: #674429;
+    border-radius: 10px;
+    border: 2px #674429 solid;
+  }
+  
+  .SUNamebox {
+    width: 741px;
+    height: 70px;
+    left: 483.01px;
+    top: 557px;
+    position: absolute;
+    background: white;
+    border: 2px #674429 solid;
+  }
+  
+  .SUEmailbox {
+    width: 344px;
+    height: 70px;
+    left: 483.01px;
+    top: 636px;
+    position: absolute;
+    background: white;
+    border: 2px #674429 solid;
+  }
+  
+  .SUEmailselfbox {
+    width: 344px;
+    height: 70px;
+    left: 880.01px;
+    top: 636px;
+    position: absolute;
+    background: white;
+    border: 2px #674429 solid;
+  }
+  
+  .SUEmailselectbox {
+    width: 344px;
+    height: 70px;
+    left: 880.01px;
+    top: 715px;
+    position: absolute;
+    background: white;
+    border: 2px #674429 solid;
+  }
+  
+  .SUPasswordbox {
+    width: 741px;
+    height: 70px;
+    left: 483.01px;
+    top: 399px;
+    position: absolute;
+    background: white;
+    border: 2px #674429 solid;
+  }
+  
+  .SUPasswordcheckbox {
+    width: 741px;
+    height: 70px;
+    left: 483.01px;
+    top: 478px;
+    position: absolute;
+    background: white;
+    border: 2px #674429 solid;
+  }
+  
+  .Idline {
+    width: 220px;
+    height: 0;
+    left: 222px;
+    top: 313px;
+    position: absolute;
+    border: 1px #674429 solid;
+  }
+  
+  .Emailline {
+    width: 220px;
+    height: 0;
+    left: 217.01px;
+    top: 631px;
+    position: absolute;
+    border: 1px #674429 solid;
+  }
+  
+  .Passwordline {
+    width: 220px;
+    height: 0;
+    left: 216px;
+    top: 394.44px;
+    position: absolute;
+    border: 1px #674429 solid;
+  }
+  
+  .Passwordcheckline {
+    width: 220px;
+    height: 0;
+    left: 216px;
+    top: 473.44px;
+    position: absolute;
+    border: 1px #674429 solid;
+  }
+  
+  .Nameline {
+    width: 220px;
+    height: 0;
+    left: 216px;
+    top: 552.44px;
+    position: absolute;
+    border: 1px #674429 solid;
+  }
+  
+  .Lastline {
+    width: 220px;
+    height: 0;
+    left: 216.01px;
+    top: 789px;
+    position: absolute;
+    border: 1px #674429 solid;
+  }
+  
+  .IdText {
+    position: absolute;
+    color: black;
+    font-size: 28px;
+    font-family: 'Inter';
+    font-weight: 400;
+    word-wrap: break-word;
+    left: 222.01px;
+    top: 337.96px;
+  }
+  
+  .PasswordText {
+    position: absolute;
+    color: black;
+    font-size: 28px;
+    font-family: 'Inter';
+    font-weight: 400;
+    word-wrap: break-word;
+    left: 222.01px;
+    top: 416.96px;
+  }
+  
+  .PasswordCheckText {
+    position: absolute;
+    color: black;
+    font-size: 28px;
+    font-family: 'Inter';
+    font-weight: 400;
+    word-wrap: break-word;
+    left: 222.01px;
+    top: 495.96px;
+  }
+  
+  .NameText {
+    position: absolute;
+    color: black;
+    font-size: 28px;
+    font-family: 'Inter';
+    font-weight: 400;
+    word-wrap: break-word;
+    left: 223.01px;
+    top: 575px;
+  }
+  
+  .EmailText {
+    position: absolute;
+    color: black;
+    font-size: 28px;
+    font-family: 'Inter';
+    font-weight: 400;
+    word-wrap: break-word;
+    left: 223.01px;
+    top: 653px;
+  }
+  
+  .PasswordHint {
+    position: absolute;
+    color: #919191;
+    font-size: 28px;
+    font-family: 'Inter';
+    font-weight: 400;
+    word-wrap: break-word;
+    left: 501.01px;
+    top: 416.96px;
+  }
+  
+  .PasswordCheckHint {
+    position: absolute;
+    color: #919191;
+    font-size: 28px;
+    font-family: 'Inter';
+    font-weight: 400;
+    word-wrap: break-word;
+    left: 501.01px;
+    top: 495.96px;
+  }
+  
+  .EmailSelfHint {
+    position: absolute;
+    color: #919191;
+    font-size: 28px;
+    font-family: 'Inter';
+    font-weight: 400;
+    word-wrap: break-word;
+    left: 896.01px;
+    top: 733px;
+  }
+  
+  .EmailArrow {
+    width: 10.51px;
+    height: 20.01px;
+    left: 1191px;
+    top: 755.51px;
+    position: absolute;
+    transform: rotate(-90deg);
+    transform-origin: 0 0;
+    background: #717171;
+  }
+  
+  .CheckDuplicationText {
+    position: absolute;
+    color: white;
+    font-size: 28px;
+    font-family: 'Inter';
+    font-weight: 600;
+    word-wrap: break-word;
+    left: 1101.01px;
+    top: 338px;
+  }
+  
+  .FinishText {
+    position: absolute;
+    color: white;
+    font-size: 28px;
+    font-family: 'Inter';
+    font-weight: 600;
+    word-wrap: break-word;
+    left: 668px;
+    top: 891px;
+  }
+  
+  .SignupTitle {
+    width: 220px;
+    height: 75px;
+    left: 610px;
+    top: 120px;
+    position: absolute;
+  }
+  
+  .TitleText {
+    left: 27px;
+    top: 21px;
+    position: absolute;
+    color: #C4AB97;
+    font-size: 45px;
+    font-family: 'Inter';
+    font-weight: 700;
+    word-wrap: break-word;
+  }
+  
+  .Titleline {
+    width: 220px;
+    height: 0;
+    left: 0;
+    top: 0;
+    position: absolute;
+    border: 3px #DCC5B3 solid;
+  }
+  
