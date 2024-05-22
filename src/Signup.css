@@ -5,6 +5,10 @@
     background: white;
   }
   
+  .initialState {
+    color: gray
+  }
+
   .Background {
     position: fixed;
     top: 0;
@@ -40,12 +44,16 @@
     font-weight: 400;
     word-wrap: break-word;
   }
-  
+
   .SUIdbox {
-    width: 741px;
+    width: 590px;
     height: 70px;
     left: 483.01px;
     top: 320px;
+    font-size: 28px;
+    font-family: 'Inter';
+    font-weight: 400;
+    word-wrap: break-word;
     position: absolute;
     background: white;
     border: 2px #674429 solid;
@@ -118,6 +126,11 @@
     height: 70px;
     left: 483.01px;
     top: 399px;
+    font-size: 28px;
+    font-family: 'Inter';
+    font-weight: 400;
+    word-wrap: break-word;
+
     position: absolute;
     background: white;
     border: 2px #674429 solid;
