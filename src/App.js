@@ -19,6 +19,11 @@ const App = () => {
     setCurrentDate(formattedDate);
   }, []);
 
+  // Start 연결 시도 함수
+  const connectStart = () => {
+    console.log('Start');
+  };
+
   // 회원가입 페이지 보이기
   const toggleSignUp = () => {
     setShowSignUp(!showSignUp);
@@ -72,8 +77,12 @@ const App = () => {
             <div className="StateText">깨어 있음</div>
             <div className="StatePicture" />
           </div>
-          <div className="startButton" />
+          <div 
+          className="startButton" 
+          onClick={connectStart}
+          />
           <div className="StartText">시  작</div>
+
         </>
       )}
     </div>
