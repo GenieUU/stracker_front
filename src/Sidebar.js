@@ -6,7 +6,7 @@ import LogOutPicture from './_LogOutPicture.png';
 import SettingsPicture from './_SettingsPicture.png';
 import BluetoothPicture from './_BluetoothPicture.png';
 
-const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp }) => {
+const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, setHeartRate}) => {
   const [userId, setUserId] = useState('');
   const [userPassword, setUserPassword] = useState('');
 
@@ -20,9 +20,31 @@ const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp }) => {
     setUserPassword(event.target.value);
   };
 
-  // Bluetooth 연결 시도 함수
-  const connectBluetooth = () => {
-    console.log('Bluetooth');
+    // Bluetooth 연결 시도 함수
+  const connectBluetooth = async () => {
+    try {
+      const device = await navigator.bluetooth.requestDevice({
+        filters: [{ services: ['heart_rate'] }],
+      });
+
+      const server = await device.gatt.connect();
+      const service = await server.getPrimaryService('heart_rate');
+      const characteristic = await service.getCharacteristic('heart_rate_measurement');
+
+      characteristic.startNotifications();
+      characteristic.addEventListener('characteristicvaluechanged', handleHeartRateMeasurement);
+
+      console.log('Bluetooth device connected');
+    } catch (error) {
+      console.error('Error connecting to Bluetooth device:', error);
+    }
+  }
+
+    // 심박수 측정 핸들러
+  const handleHeartRateMeasurement = (event) => {
+    const value = event.target.value;
+    const heartRate = value.getUint8(1); // assuming 8-bit heart rate value
+    setHeartRate(heartRate);  // 부모 컴포넌트로 심박수 전달
   };
   
   // LogOut 연결 시도 함수

@@ -29,9 +29,12 @@
   height: 699px;
   left: 56px;
   top: 162px;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   background: #DCC5B3;
   border-radius: 40px;
+  overflow: hidden;
 }
 
 .Time {
@@ -208,10 +211,17 @@
   height: 70px;
   left: 427px;
   top: 477px;
+  justify-content: center;
   position: absolute;
-  background: #674429;
+  align-items: center;
+  background-color: #674429;
   border-radius: 10px;
+  cursor: pointer;
   border: 2px #674429 solid;
+  font-size : 36px;
+  text-align: center;
+  color : white;
+  font-weight: 1000;
 }
 
 .StartText {
@@ -223,4 +233,26 @@
   font-family: 'Inter';
   font-weight: 600;
   word-wrap: break-word;
+}
+
+.videoInput {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10%;
+  object-fit: cover; /* 영상이 요소 크기에 맞게 채워지도록 설정 */
+  border-radius: inherit; /* 부모 요소의 border-radius 상속 */
+}
+
+.outputCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10%;
+  object-fit: cover; /* 영상이 요소 크기에 맞게 채워지도록 설정 */
+  border-radius: inherit; /* 부모 요소의 border-radius 상속 */
 }
