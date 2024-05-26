@@ -100,8 +100,8 @@
   }
   
   .LoginText {
-    left: 105px;
-    top: 217px;
+    left: 80px;
+    top: 6px;
     color: white;
     font-size: 23px;
     font-weight: 700;
@@ -127,6 +127,40 @@
     color: #919191;
     font-size: 20px;
     font-weight: 300;
+    position: absolute;
+    font-family: 'Inter';
+    word-wrap: break-word;
+  }
+
+  .WelcomeMessage {
+    left: 30px;
+    top: 150px;
+    color: black;
+    font-size: 20px;
+    font-weight: 600;
+    position: absolute;
+    font-family: 'Inter';
+    word-wrap: break-word;
+  }
+  
+  .LogoutBox {
+    width: 238px;
+    height: 46px;
+    top: 208px;
+    left: 21px;
+    position: absolute;
+    background: #674429;
+    border-radius: 10px;
+    border: 1px #674429 solid;
+    z-index: 0;
+  }
+  
+  .LogoutText {
+    left: 95px;
+    top: 12px;
+    color: white;
+    font-size: 23px;
+    font-weight: 700;
     position: absolute;
     font-family: 'Inter';
     word-wrap: break-word;

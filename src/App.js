@@ -11,6 +11,8 @@ const App = () => {
   const [sideBarVisible, setSidebarVisible] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
   const [currentDate, setCurrentDate] = useState('');
+  const [user, setUser] = useState(null); // 사용자 정보
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // 오늘 날짜 넣기
   useEffect(() => {
@@ -29,6 +31,18 @@ const App = () => {
     setShowSignUp(!showSignUp);
   };
 
+  // 회원가입
+  const handleUserSignUp = (userData) => {
+    setUser(userData);
+    setShowSignUp(false);
+  };
+
+  // 로그아웃
+  const handleLogOut = () => {
+    setIsLoggedIn(false);
+    setUser(null);
+  };
+
   return (
     <div className="Main">
       {showSignUp ? (
@@ -42,11 +56,14 @@ const App = () => {
             alt="Logo" 
           />
           <div className="CameraScreen" />
-          {/* 사이드바 컴포넌트 */}
           <Sidebar 
             sideBarVisible={sideBarVisible}
             toggleSidebar={() => setSidebarVisible(!sideBarVisible)}
             toggleSignUp={toggleSignUp}
+            user={user}
+            isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
+            handleLogOut={handleLogOut}
           />
           <div className="Time">
             <div className="TimerDate">{currentDate}</div>

@@ -6,7 +6,7 @@ import LogOutPicture from './_LogOutPicture.png';
 import SettingsPicture from './_SettingsPicture.png';
 import BluetoothPicture from './_BluetoothPicture.png';
 
-const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp }) => {
+const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn, setIsLoggedIn, handleLogOut }) => {
   const [userId, setUserId] = useState('');
   const [userPassword, setUserPassword] = useState('');
 
@@ -20,6 +20,15 @@ const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp }) => {
     setUserPassword(event.target.value);
   };
 
+  // 로그인 시도
+  const handleLogin = () => {
+    if (user && userId === user.userId && userPassword === user.userPassword) {
+      setIsLoggedIn(true);
+    } else {
+      alert("아이디 또는 비밀번호가 잘못되었습니다.");
+    }
+  };
+
   // Bluetooth 연결 시도 함수
   const connectBluetooth = () => {
     console.log('Bluetooth');
@@ -30,7 +39,7 @@ const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp }) => {
     console.log('LogOut');
   };
 
-  // Bluetooth 연결 시도 함수
+  // Settings 연결 시도 함수
   const connectSettings = () => {
     console.log('Settings');
   };
@@ -45,51 +54,67 @@ const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp }) => {
       />
       {sideBarVisible && (
         <div className="Side">
-          <div className="SidebarText" onClick={toggleSignUp}>회원가입</div>
-          <img 
-            className="OutPictureX" 
-            src={OutPictureX} 
-            alt="OutPictureX" 
-            onClick={toggleSidebar}
-          />
-          <input
-          className="Idbox"
-          type="text"
-          value={userId}
-          onChange={handleUserId}
-          placeholder=" ID"
-          />
-          <input
-          className="Passwordbox"
-          type="text"
-          value={userPassword}
-          onChange={handleUserPassword}
-          placeholder=" PASSWORD"
-          />
-          <div className="Loginbox" />
-          <div className="LoginText">로그인</div>
-          <img 
-            className="BluetoothPicture" 
-            src={BluetoothPicture} 
-            alt="BluetoothPicture" 
-            onClick={connectBluetooth}
-          />
-          <img 
-            className="LogOutPicture" 
-            src={LogOutPicture} 
-            alt="LogOutPicture" 
-            onClick={connectLogOut}
-          />
-          <img 
-            className="SettingsPicture" 
-            src={SettingsPicture} 
-            alt="SettingsPicture" 
-            onClick={connectSettings}
-          />
+          {isLoggedIn ? (
+            <>
+              <div className="WelcomeMessage">
+                {user.userName}님 환영합니다.
+              </div>
+              <div className="LogoutBox" onClick={handleLogOut}>
+                <div className="LogoutText">로그아웃</div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="SidebarText" onClick={toggleSignUp}>
+                회원가입
+              </div>
+              <img
+                className="OutPictureX"
+                src={OutPictureX}
+                alt="OutPictureX"
+                onClick={toggleSidebar}
+              />
+              <input
+                className="Idbox"
+                type="text"
+                value={userId}
+                onChange={handleUserId}
+                placeholder=" ID"
+              />
+              <input
+                className="Passwordbox"
+                type="password"
+                value={userPassword}
+                onChange={handleUserPassword}
+                placeholder=" PASSWORD"
+              />
+              <div className="Loginbox" onClick={handleLogin}>
+                <div className="LoginText">로그인</div>
+              </div>
+              <img
+                className="BluetoothPicture"
+                src={BluetoothPicture}
+                alt="BluetoothPicture"
+                onClick={connectBluetooth}
+              />
+              <img
+                className="LogOutPicture"
+                src={LogOutPicture}
+                alt="LogOutPicture"
+                onClick={connectLogOut}
+              />
+              <img
+                className="SettingsPicture"
+                src={SettingsPicture}
+                alt="SettingsPicture"
+                onClick={connectSettings}
+              />
+            </>
+          )}
         </div>
       )}
     </>
   );
-};
+}
 
 export default Sidebar;
