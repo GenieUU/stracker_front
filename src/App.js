@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import SignUp from './Signup'; 
+import SignUp from './Signup';
 import Sidebar from './Sidebar';
 import logo from './_logo.png';
+import StateStudy from './_StateStudy.gif'; //상태gif-공부중
+//import StateStudy from './_StateSleep.gif'; //상태gif-조는중
 import HeartRatePicture from './_HeartRatePicture.png';
 import ConcentrationValueTri from './_ConcentrationValueTri.png';
 import './Sidebar.css';
@@ -76,12 +78,14 @@ const App = () => {
               src={ConcentrationValueTri} 
               alt="ConcentrationValueTri" 
             />
-            <div className="ConcentrationTitleBox" />
-            <div className="ConcentrationTitle">현재 집중도</div>
+            <div className="ConcentrationTitleBox">
+              <div className="ConcentrationTitle">현재 집중도</div>
+            </div>
           </div>
           <div className="HeartRate">
-            <div className="HeartRateTitleBox" />
-            <div className="HeartRateTitle">현재 심박수</div>
+            <div className="HeartRateTitleBox">
+              <div className="HeartRateTitle">현재 심박수</div>
+            </div>
             <img 
               className="HeartRatePicture" 
               src={HeartRatePicture} 
@@ -92,14 +96,18 @@ const App = () => {
           <div className="State">
             <div className="StateBox" />
             <div className="StateText">깨어 있음</div>
-            <div className="StatePicture" />
+            <img 
+              className="StatePicture" 
+              src={StateStudy} 
+              alt="StateStudy" 
+            />
           </div>
           <div 
-          className="startButton" 
-          onClick={connectStart}
-          />
-          <div className="StartText">시  작</div>
-
+            className="startButton" 
+            onClick={connectStart}
+          >
+            <div className="StartText">시  작</div>
+            </div>
         </>
       )}
     </div>

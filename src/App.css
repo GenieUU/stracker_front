@@ -1,9 +1,16 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+}
+
 .Main {
-  width: 1440px;
-  height: 1024px;
   position: relative;
+  width: 100vw;
+  height: 100vh;
   background: white;
-  z-index: ０;
 }
 
 .Background {
@@ -13,214 +20,217 @@
   width: 100vw;
   height: 100vh;
   background: rgba(249, 228, 211, 0.33);
-  z-index: ０;
+  z-index: 0;
 }
 
 .Logo {
-  width: 119px;
-  height: 119px;
-  left: 16px;
-  top: -12px;
+  width: 8.26vw;
+  height: 8.26vw;
   position: absolute;
+  left: 1.11vw;
+  top: 1.11vh;
 }
 
 .CameraScreen {
-  width: 896px;
-  height: 699px;
-  left: 56px;
-  top: 162px;
+  width: 62.22vw;
+  height: 68.25vh; 
   position: absolute;
+  left: 3.89vw;
+  top: 15.82vh;
   background: #DCC5B3;
-  border-radius: 40px;
-}
-
-.Time {
-  width: 255px;
-  height: 86px;
-  left: 1068px;
-  top: 232px;
-  position: absolute;
+  border-radius: 4.17vh;
   z-index: 1;
 }
 
-.TimerTime {
-  left: 3;
-  top: 32px;
+.Time {
+  width: 17.71vw; 
+  height: 8.40vh;
   position: absolute;
-  color: black;
-  font-size: 45px;
-  font-family: 'Inter';
-  font-weight: 700;
-  word-wrap: break-word;
+  left: 74.17vw; 
+  top: 22.68vh;
   z-index: 1;
 }
 
 .TimerDate {
-  left: 0px;
-  top: 0;
-  position: absolute;
+  font-size: 1.5vw; 
+  font-weight: 700;
   color: black;
-  font-size: 30px;
-  font-family: 'Inter';
+  text-align: center;
+}
+
+.TimerTime {
+  font-size: 2.5vw; 
   font-weight: 700;
-  word-wrap: break-word;
-  z-index: 1;
-}
-
-.Concentration {
-  width: 251px;
-  height: 82px;
-  left: 1061px;
-  top: 678px;
-  position: absolute;
-}
-
-.ConcentrationValue {
-  width: 240px;
-  height: 20px;
-  left: 11px;
-  top: 62px;
-  position: absolute;
-  background: linear-gradient(90deg, #DCC5B3 0%, #C4AB97 31%, #A48871 60%, #84644B 80%, #614026 100%);
-  border-radius: 10px;
-}
-
-.ConcentrationValueTri {
-  width: 10px;
-  height: 13px;
-  left: 90px;
-  top: 60px;
-  position: absolute;
-}
-
-.ConcentrationTitleBox {
-  width: 120px;
-  height: 40px;
-  left: 0;
-  top: 0;
-  position: absolute;
-  background: #DCC5B3;
-  border-radius: 20px;
-}
-
-.ConcentrationTitle {
-  left: 11px;
-  top: 8px;
-  position: absolute;
-  color: white;
-  font-size: 18px;
-  font-family: 'Inter';
-  font-weight: 700;
-  word-wrap: break-word;
-}
-
-.HeartRate {
-  width: 264px;
-  height: 87px;
-  left: 1060px;
-  top: 569px;
-  position: absolute;
-}
-
-.HeartRateTitleBox {
-  width: 120px;
-  height: 40px;
-  left: 0;
-  top: 0;
-  position: absolute;
-  background: #DCC5B3;
-  border-radius: 20px;
-}
-
-.HeartRateTitle {
-  left: 11px;
-  top: 8px;
-  position: absolute;
-  color: white;
-  font-size: 18px;
-  font-family: 'Inter';
-  font-weight: 700;
-  word-wrap: break-word;
-}
-
-.HeartRatePicture {
-  width: 43.5px;
-  height: 33px;
-  left: 76px;
-  top: 54px;
-  position: absolute;
-}
-
-.HeartRateBpm {
-  width: 133px;
-  height: 18px;
-  left: 131px;
-  top: 59px;
-  position: absolute;
   color: black;
-  font-size: 20px;
-  font-family: 'Inter';
-  font-weight: 700;
-  word-wrap: break-word;
+  text-align: center;
 }
 
 .State {
-  width: 270px;
-  height: 163px;
-  left: 1061px;
-  top: 356px;
+  width: 18.75vw; 
+  height: 15.93vh; 
   position: absolute;
+  left: 73.61vw; 
+  top: 34.77vh; 
 }
 
 .StateBox {
-  width: 270px;
-  height: 163px;
-  left: 0;
-  top: 0;
-  position: absolute;
+  width: 100%;
+  height: 100%;
   background: white;
-  border-radius: 20px;
-  border: 3px #DCC5B3 solid;
-}
-
-.StateText {
-  left: 91px;
-  top: 103px;
-  position: absolute;
-  color: black;
-  font-size: 22px;
-  font-family: 'Inter';
-  font-weight: 200;
-  word-wrap: break-word;
+  border-radius: 2.08vh; 
+  border: 0.21vh solid #DCC5B3;
+  position: relative;
+  z-index: 1; 
 }
 
 .StatePicture {
-  width: 27.78px;
-  height: 55.02px;
-  left: 121px;
-  top: 38px;
-  position: absolute;
+  width: 3vw;
+  height: 5vh; 
   background: black;
+  position: absolute;
+  left: 44.72%; 
+  top: 23.31%; 
+  z-index: 2;
+}
+
+
+.StateText {
+  font-size: 1.3vw; 
+  font-weight: 200;
+  color: black;
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 65%;
+  z-index: 2;
+}
+
+.Concentration {
+  width: 17.43vw; 
+  height: 8.13vh; 
+  position: absolute;
+  left: 73.54vw;
+  top: 66.18vh; 
+  z-index: 1; 
+}
+
+.ConcentrationValue {
+  width: 94.46%; 
+  height: 2.04vh; 
+  background: linear-gradient(90deg, #DCC5B3 0%, #C4AB97 31%, #A48871 60%, #84644B 80%, #614026 100%);
+  border-radius: 1.04vh;
+  position: absolute;
+  top: 4.83vh; 
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1; 
+}
+
+.ConcentrationValueTri {
+  width: 0.69vw; 
+  height: 1.11vh;
+  position: absolute;
+  left: 37.04%; 
+  top: 4.72vh; 
+  z-index: 2;
+}
+
+.ConcentrationTitleBox {
+  width: 46.67%; 
+  height: 4.17vh; 
+  background: #DCC5B3;
+  border-radius: 2.08vh; 
+  position: absolute;
+  top: -5%;
+  left: 25%;
+  transform: translateX(-50%);
+  z-index: 1; 
+}
+
+.ConcentrationTitle {
+  font-size: 2vh; 
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  line-height: 4.17vh;
+  position: relative;
+  z-index: 2; 
+}
+
+.HeartRate {
+  width: 18.33vw; 
+  height: 8.51vh; 
+  position: absolute;
+  left: 73.47vw; 
+  top: 55.57vh; 
+  z-index: 1; 
+}
+
+.HeartRateTitleBox {
+  width: 45.45%; 
+  height: 4.17vh; 
+  background: #DCC5B3;
+  border-radius: 2.08vh; 
+  position: absolute;
+  top: -5%;
+  left: 25%;
+  transform: translateX(-50%);
+  z-index: 1; 
+}
+
+.HeartRateTitle {
+  font-size: 2vh; 
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  line-height: 4.17vh;
+  position: relative;
+  top: 0;
+  right: 0;
+  z-index: 2; 
+}
+
+.HeartRatePicture {
+  width: 3.02vw; 
+  height: 3.34vh;
+  position: absolute;
+  left: 15vw; 
+  top: 5.32vh;
+  z-index: 2; 
+}
+
+.HeartRateBpm {
+  font-size: 1vw;
+  font-weight: 700;
+  color: black;
+  position: absolute;
+  left: 9.09vw; 
+  top: 5vh; 
+  z-index: 2; 
 }
 
 .startButton {
-  width: 154px;
-  height: 70px;
-  left: 427px;
-  top: 477px;
+  width: 10.69vw; 
+  height: 7.22vh; 
   position: absolute;
+  left: 29.69vw;
+  top: 46.57vh;
   background: #674429;
-  border-radius: 10px;
-  border: 2px #674429 solid;
+  border-radius: 1.04vh; 
+  border: 0.21vh solid #674429; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2; 
 }
 
 .StartText {
-  left: 471px;
-  top: 495px;
-  position: absolute;
-  color: white;
-  font-size: 28px;
-  font-family: 'Inter';
+  font-size: 2.92vh;
   font-weight: 600;
-  word-wrap: break-word;
+  color: white;
+  text-align: center;
+  position: relative;
+  z-index: 3; 
 }
