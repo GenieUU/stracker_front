@@ -11,6 +11,7 @@ import './Sidebar.css';
 
 const App = () => {
   const [sideBarVisible, setSidebarVisible] = useState(false);
+  const [isStarted, setIsStarted] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
   const [currentDate, setCurrentDate] = useState('');
   const [user, setUser] = useState(null); // 사용자 정보
@@ -26,6 +27,7 @@ const App = () => {
   // Start 연결 시도 함수
   const connectStart = () => {
     console.log('Start');
+    setIsStarted(true); 
   };
 
   // 회원가입 페이지 보이기
@@ -48,7 +50,7 @@ const App = () => {
   return (
     <div className="Main">
       {showSignUp ? (
-        <SignUp />  // 회원가입 페이지가 보이는 경우
+        <SignUp />
       ) : (
         <>
           <div className="Background" />
@@ -71,6 +73,15 @@ const App = () => {
             <div className="TimerDate">{currentDate}</div>
             <div className="TimerTime">00 : 00 : 00</div>
           </div>
+          <div className="State">
+            <div className="StateBox" />
+            <div className="StateText">깨어 있음</div>
+            <img 
+              className="StatePicture" 
+              src={StateStudy} 
+              alt="StateStudy" 
+            />
+          </div>
           <div className="Concentration">
             <div className="ConcentrationValue" />
             <img 
@@ -91,23 +102,14 @@ const App = () => {
               src={HeartRatePicture} 
               alt="HeartRatePicture" 
             />
-            <div className="HeartRateBpm">80 BPM</div>
+            <div className="HeartRateBpm"> -- BPM</div>
           </div>
-          <div className="State">
-            <div className="StateBox" />
-            <div className="StateText">깨어 있음</div>
-            <img 
-              className="StatePicture" 
-              src={StateStudy} 
-              alt="StateStudy" 
-            />
-          </div>
-          <div 
-            className="startButton" 
-            onClick={connectStart}
-          >
-            <div className="StartText">시  작</div>
+            {!isStarted && (
+            <div className="startButton" 
+            onClick={connectStart}>
+              <div className="StartText">시 작</div>
             </div>
+          )}
         </>
       )}
     </div>

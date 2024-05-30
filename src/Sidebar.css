@@ -1,167 +1,124 @@
 .Side {
-    width: 280px;
-    height: 390px;
-    position: fixed;
-    background: #DCC5B3;
-    border-bottom-left-radius: 20px;
-    right: 0;
-    z-index: 10;
-  }
-  
-  .OutPictureX {
-    width: 23px;
-    height: 23px;
-    right: 8px;
-    top: 10px;
-    position: absolute;
-  }
+  width: 20vw;
+  height: 50vh;
+  position: fixed;
+  background: #DCC5B3;
+  border-bottom-left-radius: 2vh;
+  right: 0;
+  z-index: 10;
+}
 
-  .Idbox {
-    width: 238px;
-    height: 46px;
-    top: 102px;
-    left: 21px;
-    font-size: 28px;
-    font-family: 'Inter';
-    font-weight: 400;
-    word-wrap: break-word;
-    position: absolute;
-    background: white;
-    border-radius: 10px;
-    border: 1px #674429 solid;
-    z-index: 0;
-  }
+.SideButton {
+  width: 2.36vw;
+  height: 2.08vh;
+  left: calc(100vw - 2.36vw - 1vw);
+  top: 2.56vh;
+  cursor: pointer;
+  position: absolute;
+}
   
-  .Passwordbox {
-    width: 238px;
-    height: 46px;
-    top: 155px;
-    left: 21px;
-    font-size: 28px;
-    font-family: 'Inter';
-    font-weight: 400;
-    word-wrap: break-word;
-    position: absolute;
-    background: white;
-    border-radius: 10px;
-    border: 1px #674429 solid;
-    z-index: 0;
-  }
+.OutPictureX {
+  width: 1.2vw;
+  height: 2.2vh;
+  right: 0.56vw;
+  top: 1.04vh;
+  cursor: pointer;
+  position: absolute;
+}
 
-  .Loginbox {
-    width: 238px;
-    height: 46px;
-    top: 150px;
-    left: 21px;
-    position: absolute;
-    background: white;
-    border-radius: 10px;
-    border: 1px #674429 solid;
-    z-index: 0;
-  }
-
-  .Loginbox {
-    top: 208px;
-    background: #674429;
-  }
-  .BluetoothPicture {
-    width: 18px;
-    height: 20px;
-    right: 68px;
-    top: 330px;
-    position: absolute;
-  }
-
-  .LogOutPicture {
-    width: 18px;
-    height: 20px;
-    right: 45px;
-    top: 330px;
-    position: absolute;
-  }
-
-  .SettingsPicture {
-    width: 20px;
-    height: 20px;
-    right: 20px;
-    top: 330px;
-    position: absolute;
-  }
-
-  .SidebarText {
-    left: 115px;
-    top: 257px;
-    color: black;
-    font-size: 12px;
-    font-weight: 300;
-    position: absolute;
-    font-family: 'Inter';
-    word-wrap: break-word;
-  }
+/*로그인 부분*/
+.Idbox {
+  width: 17vw;
+  height: 6.4vh;
+  top: 20%;
+  left: 7%;
+  font-size: 1.5vw;
+  position: absolute;
+  background: white;
+  border-radius: 1vh;
+  border: 0.14vw #674429 solid;
+  z-index: 0;
+}
   
-  .LoginText {
-    left: 80px;
-    top: 6px;
-    color: white;
-    font-size: 23px;
-    font-weight: 700;
-    position: absolute;
-    font-family: 'Inter';
-    word-wrap: break-word;
-  }
-  
-  .Id {
-    left: 40px;
-    top: 111px;
-    color: #919191;
-    font-size: 20px;
-    font-weight: 300;
-    position: absolute;
-    font-family: 'Inter';
-    word-wrap: break-word;
-  }
-  
-  .Password {
-    left: 40px;
-    top: 165px;
-    color: #919191;
-    font-size: 20px;
-    font-weight: 300;
-    position: absolute;
-    font-family: 'Inter';
-    word-wrap: break-word;
-  }
+.Passwordbox {
+  width: 17vw;
+  height: 6.4vh;
+  top: 35%;
+  left: 7%;
+  font-size: 1.5vw;
+  position: absolute;
+  background: white;
+  border-radius: 1vh;
+  border: 0.14vw #674429 solid;
+  z-index: 0;
+}
 
-  .WelcomeMessage {
-    left: 30px;
-    top: 150px;
-    color: black;
-    font-size: 20px;
-    font-weight: 600;
-    position: absolute;
-    font-family: 'Inter';
-    word-wrap: break-word;
-  }
-  
-  .LogoutBox {
-    width: 238px;
-    height: 46px;
-    top: 208px;
-    left: 21px;
-    position: absolute;
-    background: #674429;
-    border-radius: 10px;
-    border: 1px #674429 solid;
-    z-index: 0;
-  }
-  
-  .LogoutText {
-    left: 95px;
-    top: 12px;
-    color: white;
-    font-size: 23px;
-    font-weight: 700;
-    position: absolute;
-    font-family: 'Inter';
-    word-wrap: break-word;
-  }
+.Loginbox {
+  width: 17vw;
+  height: 6.4vh;
+  top: 50%;
+  left: 7%;
+  font-size: 1.5vw;
+  position: absolute;
+  background: #674429;
+  border-radius: 1vh;
+  border: 0.14vw #674429 solid;
+  z-index: 0;
+  cursor: pointer;
+}
+
+.LoginText {
+  top: 20%;
+  left: 37%;
+  color: white;
+  font-size: 1.5vw;
+  font-weight: 700;
+  position: absolute;
+}
+
+.SingUpText {
+  top: 65%;
+  left: 40%;
+  color: black;
+  font-size: 1vw;
+  font-weight: 500;
+  cursor: pointer;
+  position: absolute;
+}
+
+/*하단 버튼 부분(블루투스, 로그아웃, 설정)*/
+.BluetoothPicture {
+  width: 1.2vw;
+  height: 2.3vh;
+  right: 4.72vw;
+  top: 44vh;
+  cursor: pointer;
+  position: absolute;
+}
+
+.LogOutPicture {
+  width: 1.2vw;
+  height: 2.08vh;
+  right: 3.13vw;
+  top: 44.1vh;
+  cursor: pointer;
+  position: absolute;
+}
+
+.SettingsPicture {
+  width: 1.39vw;
+  height: 2.08vh;
+  right: 1.39vw;
+  top: 44.1vh;
+  cursor: pointer;
+  position: absolute;
+}
+
+.WelcomeMessage {
+  left: 2vw;
+  top: 17vh;
+  color: black;
+  font-size: 1.39vw;
+  font-weight: 600;
+  position: absolute;
+}

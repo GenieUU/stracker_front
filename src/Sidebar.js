@@ -65,8 +65,8 @@ const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn
             </>
           ) : (
             <>
-              <div className="SidebarText" onClick={toggleSignUp}>
-                회원가입
+              <div className="SingUpText" 
+              onClick={toggleSignUp}>회원가입
               </div>
               <img
                 className="OutPictureX"
