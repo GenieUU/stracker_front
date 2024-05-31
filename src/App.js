@@ -3,6 +3,7 @@ import './App.css';
 import SignUp from './Signup';
 import Sidebar from './Sidebar';
 import logo from './_logo.png';
+import SideButton from './_SideButton.png';
 import StateStudy from './_StateStudy.gif'; //상태gif-공부중
 //import StateStudy from './_StateSleep.gif'; //상태gif-조는중
 import HeartRatePicture from './_HeartRatePicture.png';
@@ -10,12 +11,13 @@ import ConcentrationValueTri from './_ConcentrationValueTri.png';
 import './Sidebar.css';
 
 const App = () => {
-  const [sideBarVisible, setSidebarVisible] = useState(false);
-  const [isStarted, setIsStarted] = useState(false);
-  const [showSignUp, setShowSignUp] = useState(false);
-  const [currentDate, setCurrentDate] = useState('');
+  const [sideBarVisible, setSidebarVisible] = useState(false); // 사이드바 보이기 여부
+  const [isStarted, setIsStarted] = useState(false); // 사직 버튼 보이기 여부
+  const [showSignUp, setShowSignUp] = useState(false); // 회원가입 페이지 정보
+  const [currentDate, setCurrentDate] = useState(''); // 현재 날짜 정보
   const [user, setUser] = useState(null); // 사용자 정보
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 여부
+  const [currentPage, setCurrentPage] = useState('main'); // 현재 페이지 정보(메인 페이지, 회원가입 페이지)
 
   // 오늘 날짜 넣기
   useEffect(() => {
@@ -33,12 +35,14 @@ const App = () => {
   // 회원가입 페이지 보이기
   const toggleSignUp = () => {
     setShowSignUp(!showSignUp);
+    setCurrentPage('signup');
   };
 
   // 회원가입
   const handleUserSignUp = (userData) => {
     setUser(userData);
     setShowSignUp(false);
+    setCurrentPage('main');
   };
 
   // 로그아웃
@@ -47,10 +51,18 @@ const App = () => {
     setUser(null);
   };
 
+  // 현재 페이지 정보
+  const navigateToMain = () => {
+    setCurrentPage('main');
+  };
+
   return (
     <div className="Main">
-      {showSignUp ? (
-        <SignUp />
+      {currentPage === 'signup' ? (
+        <SignUp 
+        toggleSidebar={() => setSidebarVisible(!sideBarVisible)} 
+        sideBarVisible={sideBarVisible}
+        navigateToMain={navigateToMain} />
       ) : (
         <>
           <div className="Background" />
@@ -58,8 +70,15 @@ const App = () => {
             className="Logo" 
             src={logo} 
             alt="Logo" 
+            onClick={navigateToMain}
           />
           <div className="CameraScreen" />
+          <img
+          className="SideButton"
+          src={SideButton}
+          alt="SideButton"
+          onClick={() => setSidebarVisible(!sideBarVisible)}
+          />
           <Sidebar 
             sideBarVisible={sideBarVisible}
             toggleSidebar={() => setSidebarVisible(!sideBarVisible)}

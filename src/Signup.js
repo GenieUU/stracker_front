@@ -5,7 +5,7 @@ import logo from './_logo.png';
 import SideButton from './_SideButton.png';
 import EmailArrow from './_EmailArrow.png';
 
-const SignUp = ({ sideBarVisible, toggleSidebar }) => {
+const SignUp = ({toggleSidebar, sideBarVisible, navigateToMain}) => {
   const [userId, setUserId] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [userPasswordCheck, setUserPasswordCheck] = useState('');
@@ -14,7 +14,7 @@ const SignUp = ({ sideBarVisible, toggleSidebar }) => {
   const [userEmailDomain, setUserEmailDomain] = useState('');
   const [customEmailDomain, setCustomEmailDomain] = useState('');
   const [showEmailDropdown, setShowEmailDropdown] = useState(false);
-  
+
   // SUIdbox에 입력된 값이 변경 시 호출
   const handleUserIdChange = (event) => {
     setUserId(event.target.value);
@@ -88,7 +88,7 @@ const SignUp = ({ sideBarVisible, toggleSidebar }) => {
     };
 
     console.log("User Data:", userData);
-    // Handle the data submission, e.g., send it to the server or save it to local storage.
+    // 로그인 데이터
   };
 
   return (
@@ -98,6 +98,7 @@ const SignUp = ({ sideBarVisible, toggleSidebar }) => {
         className="Logo"
         src={logo}
         alt="Logo"
+        onClick={navigateToMain}
       />
       <img
         className="SideButton"
@@ -107,7 +108,7 @@ const SignUp = ({ sideBarVisible, toggleSidebar }) => {
       />
       <Sidebar
         sideBarVisible={sideBarVisible}
-        toggleSidebar={sideBarVisible}
+        toggleSidebar={toggleSidebar}
       />
       <div className="TitleText">회원가입</div>
       <div className="Titleline"></div>
@@ -172,7 +173,7 @@ const SignUp = ({ sideBarVisible, toggleSidebar }) => {
           <img 
           className="EmailArrow" 
           src={EmailArrow} 
-          alt="EmailArrow" 
+          alt="EmailArrow"
           onClick={toggleEmailDropdown} />
         </div>
         {showEmailDropdown && (
@@ -187,8 +188,7 @@ const SignUp = ({ sideBarVisible, toggleSidebar }) => {
             onClick={() => handleEmailDomainSelect('hotmail.com')}>hotmail.com</div>
             <div className="EmailOption" 
             onClick={() => handleEmailDomainSelect('nate.com')}>nate.com</div>
-            <div className="EmailOption" 
-            onClick={() => setShowEmailDropdown(false)}>
+            <div className="EmailOption">
               <input
                 className="CustomEmailOptionInput"
                 type="text"

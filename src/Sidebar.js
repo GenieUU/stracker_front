@@ -46,34 +46,35 @@ const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn
 
   return (
     <>
-      <img
-        className="SideButton"
-        src={SideButton}
-        alt="SideButton"
-        onClick={toggleSidebar}
-      />
       {sideBarVisible && (
         <div className="Side">
+          <img 
+          className="SideButton" 
+          src={SideButton} 
+          alt="SideButton" 
+          onClick={toggleSidebar} />
           {isLoggedIn ? (
             <>
               <div className="WelcomeMessage">
                 {user.userName}님 환영합니다.
               </div>
-              <div className="LogoutBox" onClick={handleLogOut}>
+              <div 
+              className="LogoutBox" 
+              onClick={handleLogOut}>
                 <div className="LogoutText">로그아웃</div>
               </div>
             </>
           ) : (
             <>
-              <div className="SingUpText" 
+              <div 
+              className="SingUpText" 
               onClick={toggleSignUp}>회원가입
               </div>
-              <img
-                className="OutPictureX"
-                src={OutPictureX}
-                alt="OutPictureX"
-                onClick={toggleSidebar}
-              />
+              <img 
+              className="OutPictureX" 
+              src={OutPictureX} 
+              alt="OutPictureX" 
+              onClick={toggleSidebar} />
               <input
                 className="Idbox"
                 type="text"
@@ -115,6 +116,6 @@ const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn
       )}
     </>
   );
-}
+};
 
 export default Sidebar;
