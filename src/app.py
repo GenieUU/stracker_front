@@ -36,7 +36,6 @@ RIGHT_EYE_INDICES = [263, 387, 385, 362, 380, 373]
 
 # 기본 임계값 설정
 EYE_AR_THRESH = 0.18
-EYE_AR_CONSEC_FRAMES = 3
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -70,34 +69,30 @@ def predict():
 
             # 얼굴 방향에 따른 임계값 조정
             if horizontal_dist < vertical_dist:  # 옆모습
-                adjusted_eye_ar_thresh = EYE_AR_THRESH
                 one_eye_closed = left_ear < EYE_AR_THRESH or right_ear < EYE_AR_THRESH
                 direction = "옆"
             elif vertical_dist < horizontal_dist * 0.5:  # 아래를 보는 경우
-                adjusted_eye_ar_thresh = 0.15
-                one_eye_closed = ear < adjusted_eye_ar_thresh
+                one_eye_closed = ear < 0.15
                 direction = "아래"
             else:  # 정면
-                adjusted_eye_ar_thresh = EYE_AR_THRESH
-                one_eye_closed = ear < adjusted_eye_ar_thresh
-                direction = "옆"
+                one_eye_closed = ear < EYE_AR_THRESH
+                direction = "정면"
 
             # EAR 값 기반으로 눈 상태 판단
             if one_eye_closed:
-                ear_label = "감고 있음"
+                ear_label = "Closed"
             else:
-                ear_label = "뜨고 있음"
+                ear_label = "Open"
 
             result = {
-                'ear_label' : ear_label
+                'ear_label': ear_label
             }
-
         else:
             result = {
-                'ear_label': "얼굴이 없어요:(",
+                'ear_label': "얼굴이 없어요:("
             }
 
         return jsonify(result)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000)

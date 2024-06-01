@@ -43,6 +43,14 @@ body, html {
   z-index: 1;
 }
 
+/* 웹캠 입출력 */
+.videoInput, .outputCanvas {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 영상이 요소 크기에 맞게 채워지도록 설정 */
+  border-radius: inherit; /* 부모 요소의 border-radius 상속 */
+}
+
 .startButton {
   width: 10.69vw; 
   height: 7.22vh; 

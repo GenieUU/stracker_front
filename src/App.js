@@ -1,52 +1,132 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
-import SignUp from './Signup'; 
+import SignUp from './Signup';
 import Sidebar from './Sidebar';
 import logo from './_logo.png';
+import SideButton from './_SideButton.png';
+import StateStudy from './_StateStudy.gif'; // 상태gif-공부중
+import StateSleep from './_StateSleep.gif'; // 상태gif-졸고있음
 import HeartRatePicture from './_HeartRatePicture.png';
 import ConcentrationValueTri from './_ConcentrationValueTri.png';
 import './Sidebar.css';
 
 const App = () => {
   const [sideBarVisible, setSidebarVisible] = useState(false);
+  const [isStarted, setIsStarted] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
   const [currentDate, setCurrentDate] = useState('');
-  const [heartRate, setHeartRate] = useState('--');  // 심박수 상태 추가
-  const [status, setStatus] = useState('');
-  const [isConnecting, setIsConnecting] = useState(false);
-  const [isConnected, setIsConnected] = useState(false);
-  const [eyeState, setEyeState] = useState('깨어 있음');
+  const [user, setUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentPage, setCurrentPage] = useState('main');
+  const [heartRate, setHeartRate] = useState('---');
+  const [eyeState, setEyeState] = useState('연결 안됨');
+  const [sleepCount, setSleepCount] = useState(0);
+  const [elapsedTime, setElapsedTime] = useState(0);
+  const [eyeClosedTime, setEyeClosedTime] = useState(0);
   const videoRef = useRef(null);
-  const canvasRef = useRef(null);
+  const [frameIntervalId, setFrameIntervalId] = useState(null);
+  const timerIntervalId = useRef(null);
 
-  // 오늘 날짜 넣기
   useEffect(() => {
     const today = new Date();
     const formattedDate = `${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate()}일`;
     setCurrentDate(formattedDate);
   }, []);
 
+  useEffect(() => {
+    if (isStarted) {
+      startTimer();
+    } else {
+      stopTimer();
+    }
+    return () => stopTimer();
+  }, [isStarted]);
+
+  useEffect(() => {
+    if (eyeClosedTime >= 5) {
+      if (heartRate !== '---' && heartRate <= 45) {
+        setSleepCount(prevCount => prevCount + 1);
+      } else if (heartRate === '---') {
+        setSleepCount(prevCount => prevCount + 1);
+      }
+      setEyeClosedTime(0); // 졸음 횟수 증가 후 타이머 리셋
+    }
+  }, [eyeClosedTime, heartRate]);
+
+  useEffect(() => {
+    if (sleepCount > 0) {
+      console.log(`Sleep count: ${sleepCount}`);
+    }
+  }, [sleepCount]);
+
+  const toggleSignUp = () => {
+    setShowSignUp(!showSignUp);
+    setCurrentPage('signup');
+  };
+
+  const handleUserSignUp = (userData) => {
+    setUser(userData);
+    setShowSignUp(false);
+    setCurrentPage('main');
+  };
+
+  const handleLogOut = () => {
+    setIsLoggedIn(false);
+    setUser(null);
+  };
+
+  const navigateToMain = () => {
+    setCurrentPage('main');
+  };
+
+  const startTimer = () => {
+    if (!timerIntervalId.current) {
+      timerIntervalId.current = setInterval(() => {
+        setElapsedTime(prevTime => prevTime + 1);
+      }, 1000);
+    }
+  };
+
+  const stopTimer = () => {
+    if (timerIntervalId.current) {
+      clearInterval(timerIntervalId.current);
+      timerIntervalId.current = null;
+    }
+  };
+
   const connectStart = () => {
-    console.log('Start');
-    setIsConnecting(true);
-  
+    setIsStarted(true);
+
     if (videoRef.current) {
       navigator.mediaDevices.getUserMedia({ video: true })
         .then((stream) => {
           videoRef.current.srcObject = stream;
           videoRef.current.play();
-          setIsConnected(true); // 웹캠 연결 상태 업데이트
-          setIsConnecting(false); // 연결 중 상태 업데이트
-          processFrame(); // 웹캠이 켜진 후 프레임 처리 시작
+          startFrameProcessing(); // 프레임 처리 시작
         })
         .catch((err) => {
           console.error('Error accessing webcam: ', err);
-          setIsConnecting(false);
+          setIsStarted(false);
         });
     }
   };
 
+  const startFrameProcessing = () => {
+    if (!frameIntervalId) {
+      const id = setInterval(processFrame, 1000); // 1초마다 프레임 처리
+      setFrameIntervalId(id);
+    }
+  };
+
+  const stopFrameProcessing = () => {
+    if (frameIntervalId) {
+      clearInterval(frameIntervalId);
+      setFrameIntervalId(null);
+    }
+  };
+
   const processFrame = async () => {
+    if (!videoRef.current) return;
     const canvas = document.createElement('canvas');
     canvas.width = videoRef.current.videoWidth;
     canvas.height = videoRef.current.videoHeight;
@@ -60,30 +140,54 @@ const App = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ frame }),
+        body: JSON.stringify({ frame, heartRate }),
       });
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
+
       const data = await response.json();
-      setStatus(`${data.ear_label}`);
-      setEyeState(data.ear_label === 'Closed' ? '자고 있음' : '깨어 있음');
+
+      if (data.ear_label === "Closed") {
+        setEyeClosedTime(prevTime => {
+          const newTime = prevTime + 1;
+          //console.log(`Eye closed time: ${newTime}`); // 눈 감은 시간 로그
+          return newTime;
+        });
+        setEyeState('졸고 있음');
+        document.querySelector('.StatePicture').src = StateSleep;
+        stopTimer(); // 타이머 멈춤
+      } else if (data.ear_label !== "얼굴이 없어요:(") {
+        setEyeClosedTime(0); // 눈을 뜬 경우 타이머 리셋
+        setEyeState('공부중...');
+        document.querySelector('.StatePicture').src = StateStudy;
+        startTimer(); // 타이머 시작
+      } else {
+        setEyeState('얼굴이 없어요:(');
+        document.querySelector('.StatePicture').src = StateStudy;
+        stopTimer(); // 타이머 멈춤
+      }
     } catch (error) {
       console.error('Error fetching prediction:', error);
     }
-
-    requestAnimationFrame(processFrame);
   };
 
-  // 회원가입 페이지 보이기
-  const toggleSignUp = () => {
-    setShowSignUp(!showSignUp);
+  const formatTime = (time) => {
+    const getSeconds = `0${time % 60}`.slice(-2);
+    const minutes = Math.floor(time / 60);
+    const getMinutes = `0${minutes % 60}`.slice(-2);
+    const getHours = `0${Math.floor(time / 3600)}`.slice(-2);
+    return `${getHours}:${getMinutes}:${getSeconds}`;
   };
 
   return (
     <div className="Main">
-      {showSignUp ? (
-        <SignUp />  // 회원가입 페이지가 보이는 경우
+      {currentPage === 'signup' ? (
+        <SignUp 
+          toggleSidebar={() => setSidebarVisible(!sideBarVisible)} 
+          sideBarVisible={sideBarVisible}
+          navigateToMain={navigateToMain} />
       ) : (
         <>
           <div className="Background" />
@@ -91,21 +195,39 @@ const App = () => {
             className="Logo" 
             src={logo} 
             alt="Logo" 
+            onClick={navigateToMain}
           />
           <div className="CameraScreen">
-            <video ref={videoRef} className="videoInput"></video>
-            <canvas ref={canvasRef} className="outputCanvas"></canvas>
+            <video ref={videoRef} className="videoInput" style={{ display: isStarted ? 'block' : 'none' }} />
           </div>
-          {/* 사이드바 컴포넌트 */}
+          <img
+            className="SideButton"
+            src={SideButton}
+            alt="SideButton"
+            onClick={() => setSidebarVisible(!sideBarVisible)}
+          />
           <Sidebar 
             sideBarVisible={sideBarVisible}
             toggleSidebar={() => setSidebarVisible(!sideBarVisible)}
             toggleSignUp={toggleSignUp}
-            setHeartRate={setHeartRate}  // 심박수 업데이트 함수 전달
+            user={user}
+            isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
+            handleLogOut={handleLogOut}
+            setHeartRate={setHeartRate}
           />
           <div className="Time">
             <div className="TimerDate">{currentDate}</div>
-            <div className="TimerTime">00 : 00 : 00</div>
+            <div className="TimerTime">{formatTime(elapsedTime)}</div>
+          </div>
+          <div className="State">
+            <div className="StateBox" />
+            <div className="StateText">{eyeState}</div>
+            <img 
+              className="StatePicture" 
+              src={StateStudy} 
+              alt="StateStudy" 
+            />
           </div>
           <div className="Concentration">
             <div className="ConcentrationValue" />
@@ -114,12 +236,14 @@ const App = () => {
               src={ConcentrationValueTri} 
               alt="ConcentrationValueTri" 
             />
-            <div className="ConcentrationTitleBox" />
-            <div className="ConcentrationTitle">현재 집중도</div>
+            <div className="ConcentrationTitleBox">
+              <div className="ConcentrationTitle">현재 집중도</div>
+            </div>
           </div>
           <div className="HeartRate">
-            <div className="HeartRateTitleBox" />
-            <div className="HeartRateTitle">현재 심박수</div>
+            <div className="HeartRateTitleBox">
+              <div className="HeartRateTitle">현재 심박수</div>
+            </div>
             <img 
               className="HeartRatePicture" 
               src={HeartRatePicture} 
@@ -127,17 +251,10 @@ const App = () => {
             />
             <div className="HeartRateBpm">{heartRate} BPM</div>
           </div>
-          <div className="State">
-            <div className="StateBox" />
-            {/* 현재 상태 표시(눈을 감고 있음 : 자고 있음/눈을 뜨고 있음 : 깨어 있음) */}
-            <div className="StateText">{status}</div>
-            <div className="StatePicture" />
-          </div>
-          {!isConnected && (
-            <>
-              <div className="startButton" onClick={connectStart}>시 작</div>
-              {isConnecting && <div className="StartText">연결 중...</div>}
-            </>
+          {!isStarted && (
+            <div className="startButton" onClick={connectStart}>
+              <div className="StartText">시 작</div>
+            </div>
           )}
         </>
       )}
