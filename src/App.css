@@ -25,10 +25,10 @@ body, html {
 
 .Logo {
   width: 8.26vw;
-  height: 8.26vh;
-  position: absolute;
+  height: 8.26vw;
   left: 1.11vw;
-  top: 1.11vh;
+  top: 1vh;
+  position: absolute;
 }
 
 /* 카메라 */
