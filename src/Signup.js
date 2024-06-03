@@ -4,8 +4,11 @@ import Sidebar from './Sidebar';
 import logo from './_logo.png';
 import SideButton from './_SideButton.png';
 import EmailArrow from './_EmailArrow.png';
+import { auth, db } from './firebaseConfig';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
 
-const SignUp = ({toggleSidebar, sideBarVisible, navigateToMain}) => {
+const SignUp = ({ toggleSidebar, sideBarVisible, navigateToMain }) => {
   const [userId, setUserId] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [userPasswordCheck, setUserPasswordCheck] = useState('');
@@ -15,59 +18,27 @@ const SignUp = ({toggleSidebar, sideBarVisible, navigateToMain}) => {
   const [customEmailDomain, setCustomEmailDomain] = useState('');
   const [showEmailDropdown, setShowEmailDropdown] = useState(false);
 
-  // SUIdbox에 입력된 값이 변경 시 호출
-  const handleUserIdChange = (event) => {
-    setUserId(event.target.value);
-  };
+  const handleUserIdChange = (event) => setUserId(event.target.value);
+  const handleUserPasswordChange = (event) => setUserPassword(event.target.value);
+  const handleUserPasswordChangeCheck = (event) => setUserPasswordCheck(event.target.value);
+  const handleUserNameChange = (event) => setUserName(event.target.value);
+  const handleUserEmailChange = (event) => setUserEmail(event.target.value);
 
-  // Password 입력란에 입력된 값이 변경 시 호출
-  const handleUserPasswordChange = (event) => {
-    setUserPassword(event.target.value);
-  };
-
-  // Passwordcheck 입력란에 입력된 값이 변경 시 호출
-  const handleUserPasswordChangeCheck = (event) => {
-    setUserPasswordCheck(event.target.value);
-  };
-
-  // Name 입력란에 입력된 값이 변경 시 호출
-  const handleUserNameChange = (event) => {
-    setUserName(event.target.value);
-  };
-   
-  // Email 입력란에 입력된 값이 변경 시 호출
-  const handleUserEmailChange = (event) => {
-    setUserEmail(event.target.value);
-  };
-
-  // EmailSelect 입력란에 입력된 값이 변경 시 호출
   const handleEmailDomainSelect = (domain) => {
     setUserEmailDomain(domain);
     setCustomEmailDomain('');
     setShowEmailDropdown(false);
   };
 
-  // EmailSelf 입력란에 입력된 값이 변경 시 호출
   const handleCustomEmailDomainChange = (event) => {
     setCustomEmailDomain(event.target.value);
     setUserEmailDomain('');
   };
 
-    // EmailSelect 입력란에 입력된 값이 변경 시 호출
-  const toggleEmailDropdown = () => {
-    setShowEmailDropdown(!showEmailDropdown);
-  };
+  const toggleEmailDropdown = () => setShowEmailDropdown(!showEmailDropdown);
 
-  // Finish 검사
-  const handleFinishClick = () => {
-    if (
-      !userId ||
-      !userPassword ||
-      !userPasswordCheck ||
-      !userName ||
-      !userEmail ||
-      (!userEmailDomain && !customEmailDomain)
-    ) {
+  const handleFinishClick = async () => {
+    if (!userId || !userPassword || !userPasswordCheck || !userName || !userEmail || (!userEmailDomain && !customEmailDomain)) {
       alert("입력되지 않은 부분이 있습니다. 다시 확인해주세요.");
       return;
     }
@@ -77,39 +48,35 @@ const SignUp = ({toggleSidebar, sideBarVisible, navigateToMain}) => {
       return;
     }
 
-    //데이터 저장
-    const emailDomain = customEmailDomain || userEmailDomain;
-    const userData = {
-      userId,
-      userPassword,
-      userName,
-      userEmail,
-      emailDomain,
-    };
+    try {
+      const emailDomain = customEmailDomain || userEmailDomain;
+      const email = `${userEmail}@${emailDomain}`;
+      const userCredential = await createUserWithEmailAndPassword(auth, email, userPassword);
+      const user = userCredential.user;
 
-    console.log("User Data:", userData);
-    // 로그인 데이터
+      await setDoc(doc(db, "users", user.uid), {
+        userId,
+        userName,
+        userEmail: email,
+        userPassword,
+        studyTime: 0,
+        sleepCount: 0
+      });
+
+      alert("회원가입이 완료되었습니다.");
+      navigateToMain();
+    } catch (error) {
+      console.error("Error signing up: ", error);
+      alert("회원가입에 실패했습니다. 에러 메시지: " + error.message);
+    }
   };
 
   return (
     <div className="SignUp">
       <div className="Background" />
-      <img
-        className="Logo"
-        src={logo}
-        alt="Logo"
-        onClick={navigateToMain}
-      />
-      <img
-        className="SideButton"
-        src={SideButton}
-        alt="SideButton"
-        onClick={toggleSidebar}
-      />
-      <Sidebar
-        sideBarVisible={sideBarVisible}
-        toggleSidebar={toggleSidebar}
-      />
+      <img className="Logo" src={logo} alt="Logo" onClick={navigateToMain} />
+      <img className="SideButton" src={SideButton} alt="SideButton" onClick={toggleSidebar} />
+      <Sidebar sideBarVisible={sideBarVisible} toggleSidebar={toggleSidebar} />
       <div className="TitleText">회원가입</div>
       <div className="Titleline"></div>
       <div className="Idline"></div>
@@ -157,9 +124,9 @@ const SignUp = ({toggleSidebar, sideBarVisible, navigateToMain}) => {
         onChange={handleUserEmailChange}
       />
       <div className="AtSymbol">@</div>
-      <div className="SUEmailselfbox" >
+      <div className="SUEmailselfbox">
         <div className="SUEmailselfboxInner">
-        {customEmailDomain ? (
+          {customEmailDomain ? (
             <input
               className="CustomEmailDomainInput"
               type="text"
@@ -170,24 +137,15 @@ const SignUp = ({toggleSidebar, sideBarVisible, navigateToMain}) => {
           ) : (
             <span>{userEmailDomain}</span>
           )}
-          <img 
-          className="EmailArrow" 
-          src={EmailArrow} 
-          alt="EmailArrow"
-          onClick={toggleEmailDropdown} />
+          <img className="EmailArrow" src={EmailArrow} alt="EmailArrow" onClick={toggleEmailDropdown} />
         </div>
         {showEmailDropdown && (
           <div className="EmailDropdown">
-            <div className="EmailOption" 
-            onClick={() => handleEmailDomainSelect('naver.com')}>naver.com</div>
-            <div className="EmailOption" 
-            onClick={() => handleEmailDomainSelect('gmail.com')}>gmail.com</div>
-            <div className="EmailOption" 
-            onClick={() => handleEmailDomainSelect('hanmail.com')}>hanmail.com</div>
-            <div className="EmailOption" 
-            onClick={() => handleEmailDomainSelect('hotmail.com')}>hotmail.com</div>
-            <div className="EmailOption" 
-            onClick={() => handleEmailDomainSelect('nate.com')}>nate.com</div>
+            <div className="EmailOption" onClick={() => handleEmailDomainSelect('naver.com')}>naver.com</div>
+            <div className="EmailOption" onClick={() => handleEmailDomainSelect('gmail.com')}>gmail.com</div>
+            <div className="EmailOption" onClick={() => handleEmailDomainSelect('hanmail.com')}>hanmail.com</div>
+            <div className="EmailOption" onClick={() => handleEmailDomainSelect('hotmail.com')}>hotmail.com</div>
+            <div className="EmailOption" onClick={() => handleEmailDomainSelect('nate.com')}>nate.com</div>
             <div className="EmailOption">
               <input
                 className="CustomEmailOptionInput"
@@ -196,16 +154,15 @@ const SignUp = ({toggleSidebar, sideBarVisible, navigateToMain}) => {
                 onChange={handleCustomEmailDomainChange}
                 placeholder="직접 입력"
               />
-              </div>
+            </div>
           </div>
         )}
       </div>
-      <div className="SUFinishbox" 
-      onClick={handleFinishClick}>
+      <div className="SUFinishbox" onClick={handleFinishClick}>
         <div className="FinishText">가입완료</div>
       </div>
     </div>
   );
-}
+};
 
 export default SignUp;

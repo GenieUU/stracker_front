@@ -5,31 +5,38 @@ import OutPictureX from './_OutPictureX.png';
 import LogOutPicture from './_LogOutPicture.png';
 import SettingsPicture from './_SettingsPicture.png';
 import BluetoothPicture from './_BluetoothPicture.png';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth, db } from './firebaseConfig';
+import { doc, getDoc } from 'firebase/firestore';
 
-const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn, setIsLoggedIn, handleLogOut, setHeartRate}) => {
+const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn, setIsLoggedIn, handleLogOut, setHeartRate }) => {
   const [userId, setUserId] = useState('');
   const [userPassword, setUserPassword] = useState('');
+  const [userName, setUserName] = useState('');
 
-  // ID에 입력된 값이 변경 시 호출
-  const handleUserId = (event) => {
-    setUserId(event.target.value);
-  };
+  const handleUserId = (event) => setUserId(event.target.value);
+  const handleUserPassword = (event) => setUserPassword(event.target.value);
 
-  // Password 입력란에 입력된 값이 변경 시 호출
-  const handleUserPassword = (event) => {
-    setUserPassword(event.target.value);
-  };
+  const handleLogin = async () => {
+    try {
+      const email = `${userId}@gmail.com`;
+      const userCredential = await signInWithEmailAndPassword(auth, email, userPassword);
+      const userDoc = await getDoc(doc(db, "users", userCredential.user.uid));
 
-  // 로그인 시도
-  const handleLogin = () => {
-    if (user && userId === user.userId && userPassword === user.userPassword) {
-      setIsLoggedIn(true);
-    } else {
-      alert("아이디 또는 비밀번호가 잘못되었습니다.");
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        setUserName(userData.userName);
+        setIsLoggedIn(true);
+        console.log('로그인 성공:', userCredential.user);
+      } else {
+        console.error('사용자 정보를 찾을 수 없습니다.');
+      }
+    } catch (error) {
+      console.error('로그인 실패:', error);
+      alert('아이디 또는 비밀번호가 잘못되었습니다.');
     }
   };
 
-  // Bluetooth 연결 시도 함수
   const connectBluetooth = async () => {
     try {
       const device = await navigator.bluetooth.requestDevice({
@@ -49,19 +56,16 @@ const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn
     }
   };
 
-  // 심박수 측정 핸들러
   const handleHeartRateMeasurement = (event) => {
     const value = event.target.value;
-    const heartRate = value.getUint8(1); // assuming 8-bit heart rate value
-    setHeartRate(heartRate);  // 부모 컴포넌트로 심박수 전달
+    const heartRate = value.getUint8(1);
+    setHeartRate(heartRate);
   };
-  
-  // LogOut 연결 시도 함수
+
   const connectLogOut = () => {
     console.log('LogOut');
   };
 
-  // Settings 연결 시도 함수
   const connectSettings = () => {
     console.log('Settings');
   };
@@ -71,32 +75,37 @@ const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn
       {sideBarVisible && (
         <div className="Side">
           <img 
-          className="SideButton" 
-          src={SideButton} 
-          alt="SideButton" 
-          onClick={toggleSidebar} />
+            className="SideButton" 
+            src={SideButton} 
+            alt="SideButton" 
+            onClick={toggleSidebar} 
+          />
           {isLoggedIn ? (
             <>
               <div className="WelcomeMessage">
-                {user.userName}님 환영합니다.
+                {userName}님 환영합니다.
               </div>
               <div 
-              className="LogoutBox" 
-              onClick={handleLogOut}>
+                className="LogoutBox" 
+                onClick={handleLogOut}
+              >
                 <div className="LogoutText">로그아웃</div>
               </div>
             </>
           ) : (
             <>
               <div 
-              className="SingUpText" 
-              onClick={toggleSignUp}>회원가입
+                className="SingUpText" 
+                onClick={toggleSignUp}
+              >
+                회원가입
               </div>
               <img 
-              className="OutPictureX" 
-              src={OutPictureX} 
-              alt="OutPictureX" 
-              onClick={toggleSidebar} />
+                className="OutPictureX" 
+                src={OutPictureX} 
+                alt="OutPictureX" 
+                onClick={toggleSidebar} 
+              />
               <input
                 className="Idbox"
                 type="text"
