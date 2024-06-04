@@ -68,13 +68,98 @@ body, html {
   z-index: 3; 
 }
 
+/*하단 버튼*/
+.UnderPlayButton {
+  width: 3.8vw; 
+  height: 5vh; 
+  position: absolute;
+  top: 85%; 
+  left: 28%;
+  background: #674429;
+  border-radius: 1.04vh; 
+  border: 0.21vh solid #674429; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2; 
+}
+
+.UnderPlay {
+  width: 1.8vw; 
+  height: 3vh; 
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  cursor: pointer;
+  top: 86%; 
+  left: 29.2%;
+  z-index: 2;
+}
+
+.UnderPauseButton {
+  width: 3.8vw; 
+  height: 5vh; 
+  position: absolute;
+  top: 85%; 
+  left: 33%;
+  background: #674429;
+  border-radius: 1.04vh; 
+  border: 0.21vh solid #674429; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2; 
+}
+
+.UnderPause {
+  width: 2vw; 
+  height: 3vh; 
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  cursor: pointer;
+  top: 86%; 
+  left: 34%;
+  z-index: 2;
+}
+
+.UnderResetButton {
+  width: 3.8vw; 
+  height: 5vh; 
+  position: absolute;
+  top: 85%; 
+  left: 38%;
+  background: #674429;
+  border-radius: 1.04vh; 
+  border: 0.21vh solid #674429; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2; 
+}
+
+.UnderReset {
+  width: 2vw; 
+  height: 3.8vh; 
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  cursor: pointer;
+  top: 85.8%; 
+  left: 39%;
+  z-index: 2;
+}
+
 /*시간 정보*/
 .Time {
   width: 17.71vw; 
   height: 8.40vh;
   position: absolute;
   left: 74.17vw; 
-  top: 22.68vh;
+  top: 20vh;
   z-index: 1;
 }
 

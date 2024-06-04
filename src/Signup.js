@@ -6,7 +6,6 @@ import SideButton from './_SideButton.png';
 import EmailArrow from './_EmailArrow.png';
 
 const SignUp = ({toggleSidebar, sideBarVisible, navigateToMain}) => {
-  const [userId, setUserId] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [userPasswordCheck, setUserPasswordCheck] = useState('');
   const [userName, setUserName] = useState('');
@@ -14,11 +13,6 @@ const SignUp = ({toggleSidebar, sideBarVisible, navigateToMain}) => {
   const [userEmailDomain, setUserEmailDomain] = useState('');
   const [customEmailDomain, setCustomEmailDomain] = useState('');
   const [showEmailDropdown, setShowEmailDropdown] = useState(false);
-
-  // SUIdbox에 입력된 값이 변경 시 호출
-  const handleUserIdChange = (event) => {
-    setUserId(event.target.value);
-  };
 
   // Password 입력란에 입력된 값이 변경 시 호출
   const handleUserPasswordChange = (event) => {
@@ -61,7 +55,6 @@ const SignUp = ({toggleSidebar, sideBarVisible, navigateToMain}) => {
   // Finish 검사
   const handleFinishClick = () => {
     if (
-      !userId ||
       !userPassword ||
       !userPasswordCheck ||
       !userName ||
@@ -80,7 +73,6 @@ const SignUp = ({toggleSidebar, sideBarVisible, navigateToMain}) => {
     //데이터 저장
     const emailDomain = customEmailDomain || userEmailDomain;
     const userData = {
-      userId,
       userPassword,
       userName,
       userEmail,
@@ -112,23 +104,14 @@ const SignUp = ({toggleSidebar, sideBarVisible, navigateToMain}) => {
       />
       <div className="TitleText">회원가입</div>
       <div className="Titleline"></div>
-      <div className="Idline"></div>
       <div className="Emailline"></div>
       <div className="Passwordline"></div>
       <div className="Passwordcheckline"></div>
       <div className="Nameline"></div>
-      <div className="IdText">아이디</div>
       <div className="PasswordText">비밀번호</div>
       <div className="PasswordCheckText">비밀번호 확인</div>
       <div className="NameText">이름</div>
       <div className="EmailText">이메일</div>
-      <input
-        className="SUIdbox"
-        type="text"
-        value={userId}
-        onChange={handleUserIdChange}
-        placeholder="아이디를 입력해주세요"
-      />
       <input
         className="SUPasswordbox"
         type="password"

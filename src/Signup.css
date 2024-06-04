@@ -53,11 +53,11 @@
 }
 
 /*입력란 종목별 타이틀 선*/
-.Idline {
+.Emailline {
   width: 15.28vw;
   height: 0;
-  top: 27%;
-  left: 15.42vw;
+  top: 32%;
+  left: 15.07vw;
   position: absolute;
   border: 0.07vw solid #674429;
 }
@@ -65,7 +65,7 @@
 .Passwordline {
   width: 15.28vw;
   height: 0;
-  top: 38%;
+  top: 43%;
   left: 15vw;
   position: absolute;
   border: 0.07vw solid #674429;
@@ -74,7 +74,7 @@
 .Passwordcheckline {
   width: 15.28vw;
   height: 0;
-  top: 49%;
+  top: 54%;
   left: 15vw;
   position: absolute;
   border: 0.07vw solid #674429;
@@ -83,31 +83,22 @@
 .Nameline {
   width: 15.28vw;
   height: 0;
-  top: 60%;
+  top: 65%;
   left: 15vw;
   position: absolute;
   border: 0.07vw solid #674429;
 }
 
-.Emailline {
-  width: 15.28vw;
-  height: 0;
-  top: 71%;
-  left: 15.07vw;
-  position: absolute;
-  border: 0.07vw solid #674429;
-}
-
 /*입력란 종목별 타이틀*/
-.IdText {
+.EmailText {
   position: absolute;
   color: black;
   font-size: 1.94vw;
   font-family: 'Inter';
   font-weight: 400;
   word-wrap: break-word;
-  left: 15.42vw;
-  top: 30vh;
+  left: 15.49vw;
+  top: 35vh;
 }
 
 .PasswordText {
@@ -118,7 +109,7 @@
   font-weight: 400;
   word-wrap: break-word;
   left: 15.42vw;
-  top: 41vh;
+  top: 46vh;
 }
 
 .PasswordCheckText {
@@ -129,7 +120,7 @@
   font-weight: 400;
   word-wrap: break-word;
   left: 15.42vw;
-  top: 52vh;
+  top: 57vh;
 }
 
 .NameText {
@@ -140,41 +131,17 @@
   font-weight: 400;
   word-wrap: break-word;
   left: 15.49vw;
-  top: 63vh;
-}
-
-.EmailText {
-  position: absolute;
-  color: black;
-  font-size: 1.94vw;
-  font-family: 'Inter';
-  font-weight: 400;
-  word-wrap: break-word;
-  left: 15.49vw;
-  top: 74vh;
+  top: 68vh;
 }
 
 /*입력란*/
-.SUIdbox {
-  width: 51.46vw;
-  height: 9.77vh;
-  left: 33.54vw;
-  top: 27vh;
-  font-size: 1.94vw;
-  font-family: 'Inter';
-  font-weight: 400;
-  word-wrap: break-word;
-  position: absolute;
-  background: white;
-  border: 0.14vw solid #674429;
-}
 
 .SUPasswordbox {
   width: 51.46vw;
   height: 9.77vh;
   left: 33.54vw;
-  top: 38vh;
-  font-size: 1.94vw;
+  top: 43vh;
+  font-size: 1.5vw;
   font-family: 'Inter';
   font-weight: 400;
   word-wrap: break-word;
@@ -187,8 +154,8 @@
   width: 51.46vw;
   height: 9.77vh;
   left: 33.54vw;
-  top: 49vh;
-  font-size: 1.94vw;
+  top: 54vh;
+  font-size: 1.5vw;
   font-family: 'Inter';
   font-weight: 400;
   word-wrap: break-word;
@@ -201,8 +168,8 @@
   width: 51.46vw;
   height: 9.77vh;
   left: 33.54vw;
-  top: 60vh;
-  font-size: 1.94vw;
+  top: 65vh;
+  font-size: 1.5vw;
   font-family: 'Inter';
   font-weight: 400;
   word-wrap: break-word;
@@ -211,9 +178,10 @@
   border: 0.14vw solid #674429;
 }
 
+/* 메일 입력*/
 .AtSymbol {
   left: 58.33vw;
-  top: 71vh;
+  top: 34vh;
   position: absolute;
   color: black;
   font-size: 2.08vw;
@@ -226,8 +194,8 @@
   width: 23.89vw;
   height: 9.77vh;
   left: 33.54vw;
-  top: 71vh;
-  font-size: 1.94vw;
+  top: 32vh;
+  font-size: 1.5vw;
   font-family: 'Inter';
   font-weight: 400;
   word-wrap: break-word;
@@ -240,7 +208,7 @@
   width: 22.78vw;
   height: 9.77vh;
   left: 61.11vw;
-  top: 71vh;
+  top: 32vh;
   position: absolute;
   background: white;
   border: 0.14vw solid #674429;
@@ -270,7 +238,7 @@
 
 .EmailDropdown {
   top: 9.77vh;
-  left: 0;
+  left: 0vw;
   width: 100%;
   position: absolute;
   background: white;
@@ -292,7 +260,7 @@
   height: 100%;
   border: none;
   outline: none;
-  font-size: 1.94vw;
+  font-size: 1.1vw;
   font-family: 'Inter';
   font-weight: 400;
 }
@@ -302,7 +270,7 @@
   height: 100%;
   border: none;
   outline: none;
-  font-size: 1.94vw;
+  font-size: 1vw;
   font-family: 'Inter';
   font-weight: 400;
 }

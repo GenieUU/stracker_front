@@ -4,8 +4,12 @@ import SignUp from './Signup';
 import Sidebar from './Sidebar';
 import logo from './_logo.png';
 import SideButton from './_SideButton.png';
-import StateStudy from './_StateStudy.gif'; //상태gif-공부중
+import StateStudy from './_StateLoading.gif'; //상태gif-로딩중
+//import StateStudy from './_StateStudy.gif'; //상태gif-공부중
 //import StateStudy from './_StateSleep.gif'; //상태gif-조는중
+import UnderPlay from './_UnderPlay.png';
+import UnderPause from './_UnderPause.png';
+import UnderReset from './_UnderReset.png';
 import HeartRatePicture from './_HeartRatePicture.png';
 import ConcentrationValueTri from './_ConcentrationValueTri.png';
 import './Sidebar.css';
@@ -123,6 +127,24 @@ const App = () => {
             />
             <div className="HeartRateBpm"> -- BPM</div>
           </div>
+          <div className="UnderPlayButton" />
+            <img 
+              className="UnderPlay" 
+              src={UnderPlay} 
+              alt="UnderPlay" 
+            />
+            <div className="UnderPauseButton" />
+            <img 
+              className="UnderPause" 
+              src={UnderPause} 
+              alt="UnderPause" 
+            />
+            <div className="UnderResetButton" />
+            <img 
+              className="UnderReset" 
+              src={UnderReset} 
+              alt="UnderReset" 
+            />
             {!isStarted && (
             <div className="startButton" 
             onClick={connectStart}>
