@@ -92,8 +92,8 @@ body, html {
   justify-content: center;
   position: absolute;
   cursor: pointer;
-  top: 86%; 
-  left: 29.2%;
+  top: 17%; 
+  left: 28%;
   z-index: 2;
 }
 
@@ -120,8 +120,8 @@ body, html {
   justify-content: center;
   position: absolute;
   cursor: pointer;
-  top: 86%; 
-  left: 34%;
+  top: 17%; 
+  left: 24%;
   z-index: 2;
 }
 
@@ -148,8 +148,8 @@ body, html {
   justify-content: center;
   position: absolute;
   cursor: pointer;
-  top: 85.8%; 
-  left: 39%;
+  top: 13%; 
+  left: 26%;
   z-index: 2;
 }
 

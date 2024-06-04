@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 import SignUp from './Signup';
 import Sidebar from './Sidebar';
@@ -22,6 +22,8 @@ const App = () => {
   const [user, setUser] = useState(null); // 사용자 정보
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 여부
   const [currentPage, setCurrentPage] = useState('main'); // 현재 페이지 정보(메인 페이지, 회원가입 페이지)
+  const [timerTime, setTimerTime] = useState(0); // 타이머 시간 (초 단위)
+  const timerRef = useRef(null); // 타이머 참조
 
   // 오늘 날짜 넣기
   useEffect(() => {
@@ -42,13 +44,6 @@ const App = () => {
     setCurrentPage('signup');
   };
 
-  // 회원가입
-  const handleUserSignUp = (userData) => {
-    setUser(userData);
-    setShowSignUp(false);
-    setCurrentPage('main');
-  };
-
   // 로그아웃
   const handleLogOut = () => {
     setIsLoggedIn(false);
@@ -58,6 +53,37 @@ const App = () => {
   // 현재 페이지 정보
   const navigateToMain = () => {
     setCurrentPage('main');
+  };
+
+   // 타이머 시작
+   const startTimer = () => {
+    if (!timerRef.current) {
+      timerRef.current = setInterval(() => {
+        setTimerTime(prevTime => prevTime + 1);
+      }, 1000);
+    }
+  };
+
+  // 타이머 일시정지
+  const pauseTimer = () => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+  };
+
+  // 타이머 리셋
+  const resetTimer = () => {
+    pauseTimer();
+    setTimerTime(0);
+  };
+
+  // 타이머 시간 형식화
+  const formatTime = (time) => {
+    const hours = String(Math.floor(time / 3600)).padStart(2, '0');
+    const minutes = String(Math.floor((time % 3600) / 60)).padStart(2, '0');
+    const seconds = String(time % 60).padStart(2, '0');
+    return `${hours} : ${minutes} : ${seconds}`;
   };
 
   return (
@@ -94,7 +120,7 @@ const App = () => {
           />
           <div className="Time">
             <div className="TimerDate">{currentDate}</div>
-            <div className="TimerTime">00 : 00 : 00</div>
+            <div className="TimerTime">{formatTime(timerTime)}</div>
           </div>
           <div className="State">
             <div className="StateBox" />
@@ -127,24 +153,33 @@ const App = () => {
             />
             <div className="HeartRateBpm"> -- BPM</div>
           </div>
-          <div className="UnderPlayButton" />
+          <div 
+          className="UnderPlayButton" 
+          onClick={startTimer}>
             <img 
               className="UnderPlay" 
               src={UnderPlay} 
               alt="UnderPlay" 
             />
-            <div className="UnderPauseButton" />
+            </div>
+            <div 
+            className="UnderPauseButton" 
+            onClick={pauseTimer}>
             <img 
               className="UnderPause" 
               src={UnderPause} 
               alt="UnderPause" 
             />
-            <div className="UnderResetButton" />
+            </div>
+            <div 
+            className="UnderResetButton"
+            onClick={resetTimer}>
             <img 
               className="UnderReset" 
               src={UnderReset} 
               alt="UnderReset" 
             />
+            </div>
             {!isStarted && (
             <div className="startButton" 
             onClick={connectStart}>
