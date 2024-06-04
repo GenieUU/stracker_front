@@ -29,6 +29,7 @@ body, html {
   left: 1.11vw;
   top: 1vh;
   position: absolute;
+  cursor: pointer;
 }
 
 /* 카메라 */

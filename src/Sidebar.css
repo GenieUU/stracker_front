@@ -90,7 +90,7 @@
 .BluetoothPicture {
   width: 1.2vw;
   height: 2.3vh;
-  right: 4.72vw;
+  right: 3.13vw;
   top: 44vh;
   cursor: pointer;
   position: absolute;
@@ -99,12 +99,13 @@
 .LogOutPicture {
   width: 1.2vw;
   height: 2.08vh;
-  right: 3.13vw;
+  right: 1.39vw;
   top: 44.1vh;
   cursor: pointer;
   position: absolute;
 }
-
+/*
+설정
 .SettingsPicture {
   width: 1.39vw;
   height: 2.08vh;
@@ -113,6 +114,7 @@
   cursor: pointer;
   position: absolute;
 }
+*/
 
 .WelcomeMessage {
   left: 2vw;

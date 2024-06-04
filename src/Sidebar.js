@@ -3,7 +3,6 @@ import './Sidebar.css';
 import SideButton from './_SideButton.png';
 import OutPictureX from './_OutPictureX.png';
 import LogOutPicture from './_LogOutPicture.png';
-import SettingsPicture from './_SettingsPicture.png';
 import BluetoothPicture from './_BluetoothPicture.png';
 
 const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn, setIsLoggedIn, handleLogOut }) => {
@@ -39,11 +38,6 @@ const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn
     console.log('LogOut');
   };
 
-  // Settings 연결 시도 함수
-  const connectSettings = () => {
-    console.log('Settings');
-  };
-
   return (
     <>
       {sideBarVisible && (
@@ -61,7 +55,11 @@ const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn
               <div 
               className="LogoutBox" 
               onClick={handleLogOut}>
-                <div className="LogoutText">로그아웃</div>
+              <img 
+              className="OutPictureX" 
+              src={OutPictureX} 
+              alt="OutPictureX" 
+              onClick={toggleSidebar} />
               </div>
             </>
           ) : (
@@ -104,12 +102,6 @@ const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn
                 alt="LogOutPicture"
                 onClick={connectLogOut}
               />
-              <img
-                className="SettingsPicture"
-                src={SettingsPicture}
-                alt="SettingsPicture"
-                onClick={connectSettings}
-              />
             </>
           )}
         </div>
@@ -119,3 +111,20 @@ const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn
 };
 
 export default Sidebar;
+
+/*
+설정
+
+  // Settings 연결 시도 함수
+  const connectSettings = () => {
+    console.log('Settings');
+  };
+
+
+<img
+                className="SettingsPicture"
+                src={SettingsPicture}
+                alt="SettingsPicture"
+                onClick={connectSettings}
+              />
+*/
