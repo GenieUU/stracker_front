@@ -19,7 +19,7 @@ const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn
 
   const handleLogin = async () => {
     try {
-      const email = `${userId}@gmail.com`;
+      const email = `${userId}`;
       const userCredential = await signInWithEmailAndPassword(auth, email, userPassword);
       const userDoc = await getDoc(doc(db, "users", userCredential.user.uid));
 

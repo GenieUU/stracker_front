@@ -4,11 +4,13 @@ import SignUp from './Signup';
 import Sidebar from './Sidebar';
 import logo from './_logo.png';
 import SideButton from './_SideButton.png';
-import StateStudy from './_StateStudy.gif'; // 상태gif-공부중
-import StateSleep from './_StateSleep.gif'; // 상태gif-졸고있음
+import StateStudy from './_StateStudy.gif';
+import StateSleep from './_StateSleep.gif';
 import HeartRatePicture from './_HeartRatePicture.png';
 import ConcentrationValueTri from './_ConcentrationValueTri.png';
 import './Sidebar.css';
+import { auth, db } from './firebaseConfig';
+import { doc, updateDoc } from 'firebase/firestore';
 
 const App = () => {
   const [sideBarVisible, setSidebarVisible] = useState(false);
@@ -70,9 +72,23 @@ const App = () => {
     setCurrentPage('main');
   };
 
-  const handleLogOut = () => {
+  const handleLogOut = async () => {
+    if (user) {
+      try {
+        const userDoc = doc(db, "users", user.uid);
+        await updateDoc(userDoc, {
+          studyTime: elapsedTime,
+          sleepCount: sleepCount
+        });
+        console.log('사용자 데이터 저장 성공');
+      } catch (error) {
+        console.error('사용자 데이터 저장 실패:', error);
+      }
+    }
     setIsLoggedIn(false);
     setUser(null);
+    setElapsedTime(0);
+    setSleepCount(0);
   };
 
   const navigateToMain = () => {
@@ -152,7 +168,6 @@ const App = () => {
       if (data.ear_label === "Closed") {
         setEyeClosedTime(prevTime => {
           const newTime = prevTime + 1;
-          //console.log(`Eye closed time: ${newTime}`); // 눈 감은 시간 로그
           return newTime;
         });
         setEyeState('졸고 있음');
