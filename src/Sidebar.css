@@ -116,11 +116,20 @@
 }
 */
 
+/*로그인 후*/
 .WelcomeMessage {
   left: 2vw;
   top: 17vh;
   color: black;
   font-size: 1.39vw;
   font-weight: 600;
+  position: absolute;
+}
+
+.LoginCharacter {
+  width: 6.5vw;
+  height: 6.5vh;
+  top: 23%;
+  left: 15%;
   position: absolute;
 }

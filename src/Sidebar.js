@@ -4,6 +4,7 @@ import SideButton from './_SideButton.png';
 import OutPictureX from './_OutPictureX.png';
 import LogOutPicture from './_LogOutPicture.png';
 import BluetoothPicture from './_BluetoothPicture.png';
+import LoginCharacter from './_LoginCharacter.png';
 
 const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn, setIsLoggedIn, handleLogOut }) => {
   const [userId, setUserId] = useState('');
@@ -38,6 +39,7 @@ const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn
     console.log('LogOut');
   };
 
+  
   return (
     <>
       {sideBarVisible && (
@@ -52,6 +54,11 @@ const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn
               <div className="WelcomeMessage">
                 {user.userName}님 환영합니다.
               </div>
+              <img 
+              className="LoginCharacter"
+              src={LoginCharacter} 
+              alt="LoginCharacter" 
+              />
               <div 
               className="LogoutBox" 
               onClick={handleLogOut}>
@@ -87,6 +94,7 @@ const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn
                 onChange={handleUserPassword}
                 placeholder=" PASSWORD"
               />
+              
               <div className="Loginbox" onClick={handleLogin}>
                 <div className="LoginText">로그인</div>
               </div>
