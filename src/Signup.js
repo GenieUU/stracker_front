@@ -48,6 +48,10 @@ const SignUp = ({ toggleSidebar, sideBarVisible, navigateToMain }) => {
       return;
     }
 
+    if(userPassword >= 8 && userPassword <=20){
+      alert("비밀")
+    }
+
     try {
       const emailDomain = customEmailDomain || userEmailDomain;
       const email = `${userEmail}@${emailDomain}`;

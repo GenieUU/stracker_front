@@ -151,6 +151,62 @@ const App = () => {
     const frame = canvas.toDataURL('image/jpeg');
 
     try {
+        const response = await fetch('https://stracker-36qhz3umla-du.a.run.app/predict', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ frame, heartRate }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (data.ear_label === "Closed") {
+            setEyeClosedTime(prevTime => prevTime + 1);
+            if (eyeClosedTime >= 5) {
+                if (heartRate !== '--' && heartRate <= 45) {
+                    setSleepCount(prevCount => prevCount + 1);
+                } else if (heartRate === '--') {
+                    setSleepCount(prevCount => prevCount + 1);
+                }
+                setEyeClosedTime(0); // 졸음 횟수 증가 후 타이머 리셋
+            }
+            setEyeState('졸고 있음');
+            document.querySelector('.StatePicture').src = StateSleep;
+            setIsStarted(false); // 졸고 있는 경우 타이머 멈춤
+        } else if (data.ear_label !== "얼굴이 없어요:(") {
+            setEyeClosedTime(0); // 눈을 뜬 경우 타이머 리셋
+            setEyeState('공부중...');
+            document.querySelector('.StatePicture').src = StateStudy;
+            setIsStarted(true); // 깨어 있으면 타이머 시작
+        } else {
+            setEyeState('얼굴이 없어요:(');
+            document.querySelector('.StatePicture').src = StateStudy;
+            setIsStarted(false); // 얼굴이 없으면 타이머 멈춤
+        }
+    } catch (error) {
+        console.error('Error fetching prediction:', error);
+    }
+};
+
+  
+  
+  
+  /*
+  const processFrame = async () => {
+    if (!videoRef.current) return;
+    const canvas = document.createElement('canvas');
+    canvas.width = videoRef.current.videoWidth;
+    canvas.height = videoRef.current.videoHeight;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
+    const frame = canvas.toDataURL('image/jpeg');
+
+    try {
       const response = await fetch('/predict', {
         method: 'POST',
         headers: {
@@ -187,7 +243,7 @@ const App = () => {
       console.error('Error fetching prediction:', error);
     }
   };
-
+*/
   const formatTime = (time) => {
     const getSeconds = `0${time % 60}`.slice(-2);
     const minutes = Math.floor(time / 60);

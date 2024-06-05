@@ -85,12 +85,12 @@ const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn
               <div className="WelcomeMessage">
                 {userName}님 환영합니다.
               </div>
-              <div 
-                className="LogoutBox" 
-                onClick={handleLogOut}
-              >
-                <div className="LogoutText">로그아웃</div>
-              </div>
+              <img 
+                className="OutPictureX" 
+                src={OutPictureX} 
+                alt="OutPictureX" 
+                onClick={toggleSidebar} 
+              />
             </>
           ) : (
             <>

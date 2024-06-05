@@ -1,10 +1,13 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import cv2
 import numpy as np
 import mediapipe as mp
 import base64
+import time
 
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "*"}})  # 모든 경로에서 모든 도메인의 요청 허용
 
 # Mediapipe 초기화
 mp_face_mesh = mp.solutions.face_mesh
@@ -36,13 +39,22 @@ RIGHT_EYE_INDICES = [263, 387, 385, 362, 380, 373]
 
 # 기본 임계값 설정
 EYE_AR_THRESH = 0.18
+EYE_AR_CONSEC_FRAMES = 3
+
+sleep_start_time = None
+
+@app.route('/')
+def index():
+    return "Welcome to the Eye Detection Service"
 
 @app.route('/predict', methods=['POST'])
 def predict():
+    global sleep_start_time
     data = request.json
     frame_data = base64.b64decode(data['frame'].split(',')[1])
     np_arr = np.frombuffer(frame_data, np.uint8)
     frame = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
+    heart_rate = data.get('heartRate', None)
 
     with mp_face_mesh.FaceMesh(
         max_num_faces=1,
@@ -69,14 +81,17 @@ def predict():
 
             # 얼굴 방향에 따른 임계값 조정
             if horizontal_dist < vertical_dist:  # 옆모습
+                adjusted_eye_ar_thresh = EYE_AR_THRESH
                 one_eye_closed = left_ear < EYE_AR_THRESH or right_ear < EYE_AR_THRESH
                 direction = "옆"
             elif vertical_dist < horizontal_dist * 0.5:  # 아래를 보는 경우
-                one_eye_closed = ear < 0.15
+                adjusted_eye_ar_thresh = 0.15
+                one_eye_closed = ear < adjusted_eye_ar_thresh
                 direction = "아래"
             else:  # 정면
-                one_eye_closed = ear < EYE_AR_THRESH
-                direction = "정면"
+                adjusted_eye_ar_thresh = EYE_AR_THRESH
+                one_eye_closed = ear < adjusted_eye_ar_thresh
+                direction = "옆"
 
             # EAR 값 기반으로 눈 상태 판단
             if one_eye_closed:
@@ -84,15 +99,32 @@ def predict():
             else:
                 ear_label = "Open"
 
+            if ear_label == 'Closed':
+                if sleep_start_time is None:
+                    sleep_start_time = time.time()
+                elapsed_time = time.time() - sleep_start_time
+                if elapsed_time > 120:
+                    if heart_rate is not None and int(heart_rate) <= 50:
+                        is_sleeping = True
+                    else:
+                        is_sleeping = elapsed_time > 120
+                else:
+                    is_sleeping = False
+            else:
+                sleep_start_time = None
+                is_sleeping = False
+
             result = {
+                'isSleeping': is_sleeping,
                 'ear_label': ear_label
             }
         else:
             result = {
+                'isSleeping': False,
                 'ear_label': "얼굴이 없어요:("
             }
 
         return jsonify(result)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=8080)
