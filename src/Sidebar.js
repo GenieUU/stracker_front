@@ -133,20 +133,3 @@ const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn
 };
 
 export default Sidebar;
-
-/*
-설정
-
-  // Settings 연결 시도 함수
-  const connectSettings = () => {
-    console.log('Settings');
-  };
-
-
-<img
-                className="SettingsPicture"
-                src={SettingsPicture}
-                alt="SettingsPicture"
-                onClick={connectSettings}
-              />
-*/

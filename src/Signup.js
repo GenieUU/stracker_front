@@ -5,7 +5,7 @@ import logo from './_logo.png';
 import SideButton from './_SideButton.png';
 import EmailArrow from './_EmailArrow.png';
 
-const SignUp = ({toggleSidebar, sideBarVisible, navigateToMain}) => {
+const SignUp = ({toggleSidebar, sideBarVisible, navigateToMain, toggleSignUp}) => {
   const [userPassword, setUserPassword] = useState('');
   const [userPasswordCheck, setUserPasswordCheck] = useState('');
   const [userName, setUserName] = useState('');
@@ -104,6 +104,7 @@ const SignUp = ({toggleSidebar, sideBarVisible, navigateToMain}) => {
       <Sidebar
         sideBarVisible={sideBarVisible}
         toggleSidebar={toggleSidebar}
+        toggleSignUp={toggleSignUp}
       />
       <div className="TitleText">회원가입</div>
       <div className="Titleline"></div>

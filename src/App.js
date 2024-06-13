@@ -42,9 +42,9 @@ const App = () => {
 
   // 회원가입 페이지 보이기
   const toggleSignUp = () => {
-    setShowSignUp(!showSignUp);
-    setCurrentPage('signup');
-    setSidebarVisible(false);
+    setShowSignUp(true);
+        setCurrentPage('signup');
+        setSidebarVisible(false);
   };
 
   // 로그아웃
@@ -94,9 +94,10 @@ const App = () => {
     <div className="Main">
       {currentPage === 'signup' ? (
         <SignUp 
-        toggleSidebar={() => setSidebarVisible(!sideBarVisible)} 
-        sideBarVisible={sideBarVisible}
-        navigateToMain={navigateToMain} />
+          toggleSidebar={() => setSidebarVisible(!sideBarVisible)} 
+          sideBarVisible={sideBarVisible}
+          navigateToMain={navigateToMain} 
+          toggleSignUp={toggleSignUp} />
       ) : (
         <>
           <div className="Background" />
@@ -108,10 +109,10 @@ const App = () => {
           />
           <div className="CameraScreen" />
           <img
-          className="SideButton"
-          src={SideButton}
-          alt="SideButton"
-          onClick={() => setSidebarVisible(!sideBarVisible)}
+            className="SideButton"
+            src={SideButton}
+            alt="SideButton"
+            onClick={() => setSidebarVisible(!sideBarVisible)}
           />
           <Sidebar 
             sideBarVisible={sideBarVisible}
@@ -135,8 +136,7 @@ const App = () => {
               alt="StateStudy" 
             />
           </div>
-          {/*
-          <div className="Concentration">
+          {/*<div className="Concentration">
             <div className="ConcentrationValue" />
             <img 
               className="ConcentrationValueTri"
@@ -146,8 +146,7 @@ const App = () => {
             <div className="ConcentrationTitleBox">
               <div className="ConcentrationTitle">현재 집중도</div>
             </div>
-          </div>
-          */}
+          </div>*/}
           <div className="HeartRate">
             <div className="HeartRateTitleBox">
               <div className="HeartRateTitle">현재 심박수</div>
@@ -171,15 +170,15 @@ const App = () => {
             <div className="SleepCountNumber"> -- 번</div>
           </div>
           <div 
-          className="UnderPlayButton" 
-          onClick={startTimer}>
+            className="UnderPlayButton" 
+            onClick={startTimer}>
             <img 
               className="UnderPlay" 
               src={UnderPlay} 
               alt="UnderPlay" 
             />
-            </div>
-            <div 
+          </div>
+          <div 
             className="UnderPauseButton" 
             onClick={pauseTimer}>
             <img 
@@ -187,8 +186,8 @@ const App = () => {
               src={UnderPause} 
               alt="UnderPause" 
             />
-            </div>
-            <div 
+          </div>
+          <div 
             className="UnderResetButton"
             onClick={resetTimer}>
             <img 
@@ -196,10 +195,10 @@ const App = () => {
               src={UnderReset} 
               alt="UnderReset" 
             />
-            </div>
-            {!isStarted && (
+          </div>
+          {!isStarted && (
             <div className="startButton" 
-            onClick={connectStart}>
+              onClick={connectStart}>
               <div className="StartText">시 작</div>
             </div>
           )}
