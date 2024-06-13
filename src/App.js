@@ -10,7 +10,8 @@ import HeartRatePicture from './_HeartRatePicture.png';
 import ConcentrationValueTri from './_ConcentrationValueTri.png';
 import './Sidebar.css';
 import { auth, db } from './firebaseConfig';
-import { doc, updateDoc } from 'firebase/firestore';
+import { doc, updateDoc, getDoc } from 'firebase/firestore';
+import { signOut } from 'firebase/auth';
 
 const App = () => {
   const [sideBarVisible, setSidebarVisible] = useState(false);
@@ -33,7 +34,11 @@ const App = () => {
     const today = new Date();
     const formattedDate = `${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate()}일`;
     setCurrentDate(formattedDate);
-  }, []);
+
+    if (user) {
+      syncUserData();
+    }
+  }, [user]);
 
   useEffect(() => {
     if (isStarted) {
@@ -45,7 +50,7 @@ const App = () => {
   }, [isStarted]);
 
   useEffect(() => {
-    if (eyeClosedTime >= 5) {
+    if (eyeClosedTime >= 120) {
       if (heartRate !== '---' && heartRate <= 45) {
         setSleepCount(prevCount => prevCount + 1);
       } else if (heartRate === '---') {
@@ -57,9 +62,42 @@ const App = () => {
 
   useEffect(() => {
     if (sleepCount > 0) {
-      console.log(`Sleep count: ${sleepCount}`);
+      console.log(`졸음 횟수: ${sleepCount}`);
     }
   }, [sleepCount]);
+
+  // 데이터베이스에서 사용자 데이터 동기화
+  const syncUserData = async () => {
+    try {
+      const userDoc = await getDoc(doc(db, 'users', user.uid));
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        setElapsedTime(userData.studyTime || 0);
+        setSleepCount(userData.sleepCount || 0);
+        console.log(`사용자 이름: ${userData.userName}`);
+        console.log(`사용자 졸음 횟수: ${userData.sleepCount}`);
+        console.log(`사용자 공부 시간: ${userData.studyTime}`);
+      }
+    } catch (error) {
+      console.error('Failed to sync user data:', error);
+    }
+  };
+
+  // 하루가 지나면 시간 초기화
+  const checkAndResetDailyTime = () => {
+    const lastLoginDate = localStorage.getItem('lastLoginDate');
+    const today = new Date().toISOString().split('T')[0];
+
+    if (lastLoginDate !== today) {
+      setElapsedTime(0);
+      setSleepCount(0);
+      localStorage.setItem('lastLoginDate', today);
+    }
+  };
+
+  useEffect(() => {
+    checkAndResetDailyTime();
+  }, [currentDate]);
 
   const toggleSignUp = () => {
     setShowSignUp(!showSignUp);
@@ -80,9 +118,10 @@ const App = () => {
           studyTime: elapsedTime,
           sleepCount: sleepCount
         });
-        console.log('사용자 데이터 저장 성공');
+        await signOut(auth);
+        console.log('로그아웃 성공');
       } catch (error) {
-        console.error('사용자 데이터 저장 실패:', error);
+        console.error('로그아웃 실패:', error);
       }
     }
     setIsLoggedIn(false);
@@ -121,7 +160,7 @@ const App = () => {
           startFrameProcessing(); // 프레임 처리 시작
         })
         .catch((err) => {
-          console.error('Error accessing webcam: ', err);
+          console.error('웹캠 접근 실패: ', err);
           setIsStarted(false);
         });
     }
@@ -167,83 +206,24 @@ const App = () => {
 
         if (data.ear_label === "Closed") {
             setEyeClosedTime(prevTime => prevTime + 1);
-            if (eyeClosedTime >= 5) {
-                if (heartRate !== '--' && heartRate <= 45) {
-                    setSleepCount(prevCount => prevCount + 1);
-                } else if (heartRate === '--') {
-                    setSleepCount(prevCount => prevCount + 1);
-                }
-                setEyeClosedTime(0); // 졸음 횟수 증가 후 타이머 리셋
-            }
             setEyeState('졸고 있음');
             document.querySelector('.StatePicture').src = StateSleep;
-            setIsStarted(false); // 졸고 있는 경우 타이머 멈춤
-        } else if (data.ear_label !== "얼굴이 없어요:(") {
+            stopTimer(); // 눈을 감고 있는 경우 타이머 멈춤
+        } else if (data.ear_label === "얼굴이 없어요:(") {
+            setEyeState('얼굴이 없어요:(');
+            document.querySelector('.StatePicture').src = StateStudy;
+            stopTimer(); // 얼굴이 없는 경우 타이머 멈춤, 졸음 횟수 증가하지 않음
+        } else {
             setEyeClosedTime(0); // 눈을 뜬 경우 타이머 리셋
             setEyeState('공부중...');
             document.querySelector('.StatePicture').src = StateStudy;
-            setIsStarted(true); // 깨어 있으면 타이머 시작
-        } else {
-            setEyeState('얼굴이 없어요:(');
-            document.querySelector('.StatePicture').src = StateStudy;
-            setIsStarted(false); // 얼굴이 없으면 타이머 멈춤
+            startTimer(); // 눈을 뜬 경우 타이머 시작
         }
     } catch (error) {
         console.error('Error fetching prediction:', error);
     }
-};
-
-  
-  
-  
-  /*
-  const processFrame = async () => {
-    if (!videoRef.current) return;
-    const canvas = document.createElement('canvas');
-    canvas.width = videoRef.current.videoWidth;
-    canvas.height = videoRef.current.videoHeight;
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
-    const frame = canvas.toDataURL('image/jpeg');
-
-    try {
-      const response = await fetch('/predict', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ frame, heartRate }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-
-      if (data.ear_label === "Closed") {
-        setEyeClosedTime(prevTime => {
-          const newTime = prevTime + 1;
-          return newTime;
-        });
-        setEyeState('졸고 있음');
-        document.querySelector('.StatePicture').src = StateSleep;
-        stopTimer(); // 타이머 멈춤
-      } else if (data.ear_label !== "얼굴이 없어요:(") {
-        setEyeClosedTime(0); // 눈을 뜬 경우 타이머 리셋
-        setEyeState('공부중...');
-        document.querySelector('.StatePicture').src = StateStudy;
-        startTimer(); // 타이머 시작
-      } else {
-        setEyeState('얼굴이 없어요:(');
-        document.querySelector('.StatePicture').src = StateStudy;
-        stopTimer(); // 타이머 멈춤
-      }
-    } catch (error) {
-      console.error('Error fetching prediction:', error);
-    }
   };
-*/
+
   const formatTime = (time) => {
     const getSeconds = `0${time % 60}`.slice(-2);
     const minutes = Math.floor(time / 60);
@@ -269,7 +249,7 @@ const App = () => {
             onClick={navigateToMain}
           />
           <div className="CameraScreen">
-            <video ref={videoRef} className="videoInput" style={{ display: isStarted ? 'block' : 'none' }} />
+            <video ref={videoRef} className="videoInput" style={{ display: 'block' }} />
           </div>
           <img
             className="SideButton"
@@ -286,6 +266,11 @@ const App = () => {
             setIsLoggedIn={setIsLoggedIn}
             handleLogOut={handleLogOut}
             setHeartRate={setHeartRate}
+            setElapsedTime={setElapsedTime} // elapsedTime 업데이트 함수 전달
+            setSleepCount={setSleepCount}   // sleepCount 업데이트 함수 전달
+            setUser={setUser}               // setUser 함수 전달
+            elapsedTime={elapsedTime}       // elapsedTime 값 전달
+            sleepCount={sleepCount}         // sleepCount 값 전달
           />
           <div className="Time">
             <div className="TimerDate">{currentDate}</div>

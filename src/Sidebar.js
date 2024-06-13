@@ -5,11 +5,11 @@ import OutPictureX from './_OutPictureX.png';
 import LogOutPicture from './_LogOutPicture.png';
 import SettingsPicture from './_SettingsPicture.png';
 import BluetoothPicture from './_BluetoothPicture.png';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { auth, db } from './firebaseConfig';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 
-const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn, setIsLoggedIn, handleLogOut, setHeartRate }) => {
+const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn, setIsLoggedIn, setElapsedTime, setSleepCount, setHeartRate, setUser, elapsedTime, sleepCount }) => {
   const [userId, setUserId] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [userName, setUserName] = useState('');
@@ -26,8 +26,11 @@ const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn
       if (userDoc.exists()) {
         const userData = userDoc.data();
         setUserName(userData.userName);
+        setElapsedTime(userData.studyTime);
+        setSleepCount(userData.sleepCount);
+        setUser(userCredential.user);
         setIsLoggedIn(true);
-        console.log('로그인 성공:', userCredential.user);
+        console.log(`로그인 성공: 사용자 이름: ${userData.userName}, 졸음 횟수: ${userData.sleepCount}, 공부 시간: ${userData.studyTime}`);
       } else {
         console.error('사용자 정보를 찾을 수 없습니다.');
       }
@@ -35,6 +38,26 @@ const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn
       console.error('로그인 실패:', error);
       alert('아이디 또는 비밀번호가 잘못되었습니다.');
     }
+  };
+
+  const handleLogOut = async () => {
+    if (user) {
+      try {
+        const userDoc = doc(db, "users", user.uid);
+        await updateDoc(userDoc, {
+          studyTime: elapsedTime,
+          sleepCount: sleepCount
+        });
+        await signOut(auth);
+        console.log('로그아웃 성공');
+      } catch (error) {
+        console.error('로그아웃 실패:', error);
+      }
+    }
+    setIsLoggedIn(false);
+    setUser(null);
+    setElapsedTime(0);
+    setSleepCount(0);
   };
 
   const connectBluetooth = async () => {
@@ -63,7 +86,7 @@ const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn
   };
 
   const connectLogOut = () => {
-    console.log('LogOut');
+    handleLogOut();
   };
 
   const connectSettings = () => {
@@ -90,6 +113,12 @@ const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn
                 src={OutPictureX} 
                 alt="OutPictureX" 
                 onClick={toggleSidebar} 
+              />
+              <img
+                className="LogOutPicture"
+                src={LogOutPicture}
+                alt="LogOutPicture"
+                onClick={connectLogOut}
               />
             </>
           ) : (
