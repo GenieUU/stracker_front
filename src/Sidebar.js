@@ -39,7 +39,12 @@ const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn
     console.log('LogOut');
   };
 
-  
+  // 회원가입 버튼 클릭 시 호출
+  const handleSignUpClick = () => {
+    toggleSignUp();
+    toggleSidebar(); // 사이드바 닫기
+  };
+
   return (
     <>
       {sideBarVisible && (
@@ -51,29 +56,38 @@ const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn
           onClick={toggleSidebar} />
           {isLoggedIn ? (
             <>
-              <div className="WelcomeMessage">
-                {user.userName}님 환영합니다.
-              </div>
-              <img 
-              className="LoginCharacter"
-              src={LoginCharacter} 
-              alt="LoginCharacter" 
+            <img 
+                className="OutPictureX" 
+                src={OutPictureX} 
+                alt="OutPictureX" 
+                onClick={toggleSidebar} 
               />
-              <div 
-              className="LogoutBox" 
-              onClick={handleLogOut}>
               <img 
-              className="OutPictureX" 
-              src={OutPictureX} 
-              alt="OutPictureX" 
-              onClick={toggleSidebar} />
+                className="LoginCharacter" 
+                src={LoginCharacter} 
+                alt="LoginCharacter" 
+              />
+              <div className="WelcomeMessageUsername">
+                {user.userName}
               </div>
+                <div className="WelcomeMessage1">
+                  님
+                </div>
+                <div className="WelcomeMessage2">
+                  환영합니다.
+                </div>
+                <div className="LoginText1">
+                   “성공은 열심히 노력하며
+                </div>
+                <div className="LoginText2">
+                  기다리는 사람에게 찾아온다.”
+                </div>
             </>
           ) : (
             <>
               <div 
               className="SingUpText" 
-              onClick={toggleSignUp}>회원가입
+              onClick={handleSignUpClick}>회원가입
               </div>
               <img 
               className="OutPictureX" 
@@ -85,14 +99,14 @@ const Sidebar = ({ sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn
                 type="text"
                 value={userId}
                 onChange={handleUserId}
-                placeholder=" ID"
+                placeholder=" Email"
               />
               <input
                 className="Passwordbox"
                 type="password"
                 value={userPassword}
                 onChange={handleUserPassword}
-                placeholder=" PASSWORD"
+                placeholder=" Password"
               />
               
               <div className="Loginbox" onClick={handleLogin}>

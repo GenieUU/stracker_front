@@ -90,7 +90,10 @@ const SignUp = ({toggleSidebar, sideBarVisible, navigateToMain}) => {
         className="Logo"
         src={logo}
         alt="Logo"
-        onClick={navigateToMain}
+        onClick={() => {
+          navigateToMain();
+          toggleSidebar();
+        }}
       />
       <img
         className="SideButton"
@@ -117,21 +120,21 @@ const SignUp = ({toggleSidebar, sideBarVisible, navigateToMain}) => {
         type="password"
         value={userPassword}
         onChange={handleUserPasswordChange}
-        placeholder="8~20자로 입력해주세요"
+        placeholder=" 8~20자로 입력해주세요"
       />
       <input
         className="SUPasswordcheckbox"
         type="password"
         value={userPasswordCheck}
         onChange={handleUserPasswordChangeCheck}
-        placeholder="비밀번호를 다시 입력해주세요"
+        placeholder=" 비밀번호를 다시 입력해주세요"
       />
       <input
         className="SUNamebox"
         type="text"
         value={userName}
         onChange={handleUserNameChange}
-        placeholder="이름을 입력해주세요"
+        placeholder=" 이름을 입력해주세요"
       />
       <input
         className="SUEmailbox"

@@ -133,3 +133,60 @@
   left: 15%;
   position: absolute;
 }
+
+/*로그인 후*/
+.LoginCharacter {
+  width: 4.8vw;
+  height: 10vh;
+  left: 3.2vw;
+  top: 13vh;
+  cursor: pointer;
+  position: absolute;
+}
+
+.WelcomeMessageUsername {
+  left: 9.5vw;
+  top: 13.8vh;
+  color: black;
+  font-size: 1.39vw;
+  font-weight: 600;
+  position: absolute;
+}
+
+.WelcomeMessage1 {
+  left: 14vw;
+  top: 14.4vh;
+  color: black;
+  font-size: 1.2vw;
+  font-weight: 520;
+  position: absolute;
+}
+
+.WelcomeMessage2 {
+  left: 9.5vw;
+  top: 17.5vh;
+  color: black;
+  font-size: 1.2vw;
+  font-weight: 520;
+  position: absolute;
+}
+
+.LoginText1 {
+  left: 3vw;
+  top: 30vh;
+  color: black;
+  font-size: 1.2vw;
+  font-weight: 500;
+  white-space: pre-line;
+  position: absolute;
+}
+
+.LoginText2 {
+  left: 2vw;
+  top: 33vh;
+  color: black;
+  font-size: 1.2vw;
+  font-weight: 500;
+  white-space: pre-line;
+  position: absolute;
+}

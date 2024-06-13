@@ -12,7 +12,8 @@ import UnderPlay from './_UnderPlay.png';
 import UnderPause from './_UnderPause.png';
 import UnderReset from './_UnderReset.png';
 import HeartRatePicture from './_HeartRatePicture.png';
-import ConcentrationValueTri from './_ConcentrationValueTri.png';
+import SleepCountPicture from './_SleepCountPicture.png';
+//import ConcentrationValueTri from './_ConcentrationValueTri.png'; // 집중도 그래프 화살표
 import './Sidebar.css';
 
 const App = () => {
@@ -43,6 +44,7 @@ const App = () => {
   const toggleSignUp = () => {
     setShowSignUp(!showSignUp);
     setCurrentPage('signup');
+    setSidebarVisible(false);
   };
 
   // 로그아웃
@@ -54,6 +56,7 @@ const App = () => {
   // 현재 페이지 정보
   const navigateToMain = () => {
     setCurrentPage('main');
+    setSidebarVisible(false);
   };
 
    // 타이머 시작
@@ -132,6 +135,7 @@ const App = () => {
               alt="StateStudy" 
             />
           </div>
+          {/*
           <div className="Concentration">
             <div className="ConcentrationValue" />
             <img 
@@ -143,6 +147,7 @@ const App = () => {
               <div className="ConcentrationTitle">현재 집중도</div>
             </div>
           </div>
+          */}
           <div className="HeartRate">
             <div className="HeartRateTitleBox">
               <div className="HeartRateTitle">현재 심박수</div>
@@ -153,6 +158,17 @@ const App = () => {
               alt="HeartRatePicture" 
             />
             <div className="HeartRateBpm"> -- BPM</div>
+          </div>
+          <div className="SleepCount">
+            <div className="SleepCountTitleBox">
+              <div className="SleepCountTitle">졸음 횟수</div>
+            </div>
+            <img 
+              className="SleepCountPicture" 
+              src={SleepCountPicture} 
+              alt="SleepCountPicture" 
+            />
+            <div className="SleepCountNumber"> -- 번</div>
           </div>
           <div 
           className="UnderPlayButton" 

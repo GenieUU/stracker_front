@@ -272,7 +272,59 @@ body, html {
   z-index: 2; 
 }
 
+/*졸음 횟수*/
+.SleepCount {
+  width: 17.43vw; 
+  height: 8.13vh; 
+  position: absolute;
+  left: 73.54vw;
+  top: 68.18vh; 
+  z-index: 1; 
+}
+
+.SleepCountTitleBox {
+  width: 8vw; 
+  height: 4.17vh; 
+  background: #DCC5B3;
+  border-radius: 2.08vh; 
+  position: absolute;
+  top: -5%;
+  left: 0%;
+  z-index: 1; 
+}
+
+.SleepCountTitle {
+  font-size: 1vw; 
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  line-height: 4.17vh;
+  position: absolute;
+  left: 22%;
+  z-index: 2; 
+}
+
+.SleepCountPicture {
+  width: 1.8vw; 
+  height: 3.4vh;
+  position: absolute;
+  top: 70%;
+  left: 30%;
+  z-index: 2; 
+}
+
+.SleepCountNumber {
+  font-size: 1vw;
+  font-weight: 700;
+  color: black;
+  position: absolute;
+  left: 9.09vw; 
+  top: 6vh; 
+  z-index: 2; 
+}
+
 /*집중도*/
+/*
 .Concentration {
   width: 17.43vw; 
   height: 8.13vh; 
@@ -324,3 +376,4 @@ body, html {
   left: 17%;
   z-index: 2; 
 }
+*/
