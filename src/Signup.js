@@ -4,8 +4,12 @@ import Sidebar from './Sidebar';
 import logo from './_logo.png';
 import SideButton from './_SideButton.png';
 import EmailArrow from './_EmailArrow.png';
+import { auth, db } from './firebaseConfig';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
 
 const SignUp = ({toggleSidebar, sideBarVisible, navigateToMain, toggleSignUp}) => {
+  const [userId, setUserId] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [userPasswordCheck, setUserPasswordCheck] = useState('');
   const [userName, setUserName] = useState('');
@@ -14,25 +18,17 @@ const SignUp = ({toggleSidebar, sideBarVisible, navigateToMain, toggleSignUp}) =
   const [customEmailDomain, setCustomEmailDomain] = useState('');
   const [showEmailDropdown, setShowEmailDropdown] = useState(false);
 
+  const handleUserIdChange = (event) => setUserId(event.target.value);
   // Password 입력란에 입력된 값이 변경 시 호출
-  const handleUserPasswordChange = (event) => {
-    setUserPassword(event.target.value);
-  };
-
+  const handleUserPasswordChange = (event) => setUserPassword(event.target.value);
   // Passwordcheck 입력란에 입력된 값이 변경 시 호출
-  const handleUserPasswordChangeCheck = (event) => {
-    setUserPasswordCheck(event.target.value);
-  };
-
+  const handleUserPasswordChangeCheck = (event) => setUserPasswordCheck(event.target.value);
   // Name 입력란에 입력된 값이 변경 시 호출
-  const handleUserNameChange = (event) => {
-    setUserName(event.target.value);
-  };
-   
+  const handleUserNameChange = (event) => setUserName(event.target.value);
   // Email 입력란에 입력된 값이 변경 시 호출
-  const handleUserEmailChange = (event) => {
-    setUserEmail(event.target.value);
-  };
+  const handleUserEmailChange = (event) => setUserEmail(event.target.value);
+  // EmailSelect 입력란에 입력된 값이 변경 시 호출
+  const toggleEmailDropdown = () => setShowEmailDropdown(!showEmailDropdown);
 
   // EmailSelect 입력란에 입력된 값이 변경 시 호출
   const handleEmailDomainSelect = (domain) => {
@@ -45,22 +41,11 @@ const SignUp = ({toggleSidebar, sideBarVisible, navigateToMain, toggleSignUp}) =
   const handleCustomEmailDomainChange = (event) => {
     setCustomEmailDomain(event.target.value);
     setUserEmailDomain('');
-  };
-
-    // EmailSelect 입력란에 입력된 값이 변경 시 호출
-  const toggleEmailDropdown = () => {
-    setShowEmailDropdown(!showEmailDropdown);
-  };
+  };  
 
   // Finish 검사
-  const handleFinishClick = () => {
-    if (
-      !userPassword ||
-      !userPasswordCheck ||
-      !userName ||
-      !userEmail ||
-      (!userEmailDomain && !customEmailDomain)
-    ) {
+  const handleFinishClick = async () => {
+    if (!userId || !userPassword || !userPasswordCheck || !userName || !userEmail || (!userEmailDomain && !customEmailDomain)) {
       alert("입력되지 않은 부분이 있습니다. 다시 확인해주세요.");
       return;
     }
@@ -70,17 +55,31 @@ const SignUp = ({toggleSidebar, sideBarVisible, navigateToMain, toggleSignUp}) =
       return;
     }
 
-    //데이터 저장
-    const emailDomain = customEmailDomain || userEmailDomain;
-    const userData = {
-      userPassword,
-      userName,
-      userEmail,
-      emailDomain,
-    };
+    if(userPassword >= 8 && userPassword <=20){
+      alert("비밀")
+    }
 
-    console.log("User Data:", userData);
-    // 로그인 데이터
+    try {
+      const emailDomain = customEmailDomain || userEmailDomain;
+      const email = `${userEmail}@${emailDomain}`;
+      const userCredential = await createUserWithEmailAndPassword(auth, email, userPassword);
+      const user = userCredential.user;
+
+      await setDoc(doc(db, "users", user.uid), {
+        userId,
+        userName,
+        userEmail: email,
+        userPassword,
+        studyTime: 0,
+        sleepCount: 0
+      });
+
+      alert("회원가입이 완료되었습니다.");
+      navigateToMain();
+    } catch (error) {
+      console.error("Error signing up: ", error);
+      alert("회원가입에 실패했습니다. 에러 메시지: " + error.message);
+    }
   };
 
   return (
