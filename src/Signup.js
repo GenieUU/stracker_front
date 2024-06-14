@@ -45,7 +45,7 @@ const SignUp = ({toggleSidebar, sideBarVisible, navigateToMain, toggleSignUp}) =
 
   // Finish 검사
   const handleFinishClick = async () => {
-    if (!userId || !userPassword || !userPasswordCheck || !userName || !userEmail || (!userEmailDomain && !customEmailDomain)) {
+    if (!userPassword || !userPasswordCheck || !userName || !userEmail || (!userEmailDomain && !customEmailDomain)) {
       alert("입력되지 않은 부분이 있습니다. 다시 확인해주세요.");
       return;
     }
