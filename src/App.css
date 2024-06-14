@@ -78,6 +78,7 @@ body, html {
 }
 
 /*하단 버튼*/
+/*
 .UnderPlayButton {
   width: 3.8vw; 
   height: 5vh; 
@@ -133,13 +134,13 @@ body, html {
   left: 24%;
   z-index: 2;
 }
-
+*/
 .UnderResetButton {
   width: 3.8vw; 
   height: 5vh; 
   position: absolute;
   top: 85%; 
-  left: 38%;
+  left: 33%;
   background: #674429;
   border-radius: 1.04vh; 
   border: 0.21vh solid #674429; 

@@ -142,6 +142,12 @@ const Sidebar = ({
                 기다리는 사람에게 찾아온다.”
               </div>
               <img
+                className="BluetoothPicture"
+                src={BluetoothPicture}
+                alt="BluetoothPicture"
+                onClick={connectBluetooth}
+              />
+              <img
                 className="LogOutPicture"
                 src={LogOutPicture}
                 alt="LogOutPicture"

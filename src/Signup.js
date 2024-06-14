@@ -94,12 +94,14 @@ const SignUp = ({toggleSidebar, sideBarVisible, navigateToMain, toggleSignUp}) =
           toggleSidebar();
         }}
       />
+      {/*사이드바 없애기
       <img
         className="SideButton"
         src={SideButton}
         alt="SideButton"
         onClick={toggleSidebar}
       />
+      */}
       <Sidebar
         sideBarVisible={sideBarVisible}
         toggleSidebar={toggleSidebar}

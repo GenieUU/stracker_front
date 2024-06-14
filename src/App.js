@@ -8,8 +8,8 @@ import StateLoading from './_StateLoading.gif'; //상태gif-로딩중
 import StateStudy from './_StateStudy.gif'; //상태gif-공부중
 import StateSleep from './_StateSleep.gif'; //상태gif-조는중
 import StateNoFace from './_StateNoFace.gif'; //상태gif-얼굴없음
-import UnderPlay from './_UnderPlay.png';
-import UnderPause from './_UnderPause.png';
+//import UnderPlay from './_UnderPlay.png';
+//import UnderPause from './_UnderPause.png';
 import UnderReset from './_UnderReset.png';
 import HeartRatePicture from './_HeartRatePicture.png';
 import SleepCountPicture from './_SleepCountPicture.png';
@@ -392,6 +392,7 @@ const App = () => {
             />
             <div className="SleepCountNumber"> {sleepCount} 번</div>
           </div>
+          {/*버튼 실종시킴요
           <div 
             className="UnderPlayButton" 
             onClick={startTimer}>
@@ -410,6 +411,7 @@ const App = () => {
               alt="UnderPause" 
             />
           </div>
+          */}
           <div 
             className="UnderResetButton"
             onClick={() => {
