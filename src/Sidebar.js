@@ -12,7 +12,7 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore';
 const Sidebar = ({
   sideBarVisible, toggleSidebar, toggleSignUp, user, isLoggedIn, 
   setIsLoggedIn, setElapsedTime, setSleepCount, setHeartRate, 
-  setUser, elapsedTime, sleepCount 
+  setUser, elapsedTime, sleepCount, timerTime 
 }) => {
   const [userId, setUserId] = useState('');
   const [userPassword, setUserPassword] = useState('');
@@ -51,7 +51,7 @@ const Sidebar = ({
       try {
         const userDoc = doc(db, "users", user.uid);
         await updateDoc(userDoc, {
-          studyTime: elapsedTime,
+          studyTime: timerTime,
           sleepCount: sleepCount
         });
         await signOut(auth);
